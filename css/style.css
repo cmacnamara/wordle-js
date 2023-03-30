@@ -1,0 +1,39 @@
+html {
+  min-height: 100%;
+  background-image: url('../assets/obelisk.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: top;
+  background-attachment: fixed;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+
+input {
+  text-transform: uppercase;
+  background-color: gray;
+  border-radius: 10px;
+  border: none;
+}
+
+#board {
+  display: flex;
+  justify-content: center;
+  border: solid black 3px;
+  min-width: 33%;
+}
+
+#row0 {
+  
+}
+
+.cell {
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  font-size: 40px;
+}
