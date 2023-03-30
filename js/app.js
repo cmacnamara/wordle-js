@@ -7,15 +7,15 @@
 //// Add a cached element reference for the submit guess button
 //// Add an event listener to the submit guess button
 //// Add HTML button to reset the game and choose new word
-// Add a cached element reference for the reset button
-// Add an event listener to the reset button
-// Create a 2-D array variable to represent the board. Will contain character objects
-// Create character class, which contains variables letter, isInWord, isInCorrectPosition
-// Add variables for winner (boolean), guessAttemptNum, targetWord
-// Add init function
-// Set board array elements to null
-// Set winner to false
-// Set guessAttemptNum to 0
+//// Add a cached element reference for the reset button
+//// Add an event listener to the reset button
+//// Create a 2-D array variable to represent the board. Will contain character objects
+//// Create character class, which contains variables letter, isInWord, isInCorrectPosition
+//// Add variables for winner (boolean), guessAttemptNum, targetWord
+//// Add init function
+//// Set board array elements to null
+//// Set winner to false
+//// Set guessAttemptNum to 0
 // Set targetWord to randomized word from external js file
 // Import the function that will access the target word
 // Create a checkGuess function
@@ -31,13 +31,35 @@
 // STRETCH GOAL: Add difficulty selection to add or remove number of guesses allowed
 // STRETCH GOAL: Add functionality that automatically moves highlighted input to subsequent input field when a character is entered
 // STRETCH GOAL: Add sound effects to play when each character is checked and when game is won or lost
+// STRETCH GOAL: Add level variable; gain a level on each subsequent win; display RUNE MASTER after 10 subsequent wins; reset level to 0 after loss; display level up progress; save progress in localStorage
+
+
+/*-------------------------------- Classes --------------------------------*/
+
+class Character {
+  constructor(letter, idx){
+    this.letter = letter;
+    this.idx = idx;
+    this.isInWord = false;
+    this.isInCorrectPosition = false;
+  }
+}
 
 /*-------------------------------- Constants --------------------------------*/
 
+const board = [
+  [null, null, null, null, null],
+  [null, null, null, null, null],
+  [null, null, null, null, null],
+  [null, null, null, null, null],
+  [null, null, null, null, null],
+  [null, null, null, null, null],
+];
 
 
 /*---------------------------- Variables (state) ----------------------------*/
 
+let gameIsWon, guessAttemptNum, targetWord;
 
 
 /*------------------------ Cached Element References ------------------------*/
@@ -53,6 +75,17 @@ resetBtnEl.addEventListener('click', handleReset);
 
 
 /*-------------------------------- Functions --------------------------------*/
+
+function init() {
+  board.forEach(row => {
+    row.forEach(charObj => {
+      charObj = null;
+    })
+  })
+  gameIsWon = false;
+  guessAttemptNum = 0;
+  targetWord = '';
+}
 
 function handleSubmit() {
   console.log("Guess submitted");
