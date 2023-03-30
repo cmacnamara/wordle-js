@@ -1,6 +1,6 @@
 //Word list found at https://github.com/alexmj212/word-guess/blob/main/src/wordList.ts
 
-export const validWords = [
+const targetWords = [
   "cigar",
   "rebut",
   "sissy",
@@ -2317,3 +2317,11 @@ export const validWords = [
   "rural",
   "shave",
 ];
+
+function getTargetWord() {
+  return targetWords[Math.floor(Math.random()*targetWords.length)];
+}
+
+export {
+  getTargetWord,
+}

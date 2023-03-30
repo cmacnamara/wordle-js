@@ -33,6 +33,7 @@
 // STRETCH GOAL: Add sound effects to play when each character is checked and when game is won or lost
 // STRETCH GOAL: Add level variable; gain a level on each subsequent win; display RUNE MASTER after 10 subsequent wins; reset level to 0 after loss; display level up progress; save progress in localStorage
 
+import { getTargetWord } from "./wordList.js";
 
 /*-------------------------------- Classes --------------------------------*/
 
@@ -84,7 +85,7 @@ function init() {
   })
   gameIsWon = false;
   guessAttemptNum = 0;
-  targetWord = '';
+  targetWord = getTargetWord();
 }
 
 function handleSubmit() {
@@ -94,3 +95,6 @@ function handleSubmit() {
 function handleReset() {
   console.log("Game reset");
 }
+
+init();
+console.log(`Target word is ${targetWord}`);
