@@ -38,14 +38,22 @@ input {
   text-align: center;
   font-size: 50px;
   font-weight: bolder;
+  caret-color: transparent;
+  
+}
+
+input:hover {
+  cursor: pointer;
 }
 
 #board {
   display: flex;
-  justify-content: center;
-  /*border: solid black 3px;*/
+  flex-direction: column;
+  align-items: center;
+  /* border: solid black 3px; */
   min-width: 33%;
-  margin-top: 100px;
+  margin-top: 15vh;
+  gap: 7px;
 }
 
 #row0 {
