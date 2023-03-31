@@ -105,10 +105,14 @@ function init() {
 }
 
 function render() {
+  let rowIdx = 0;
   for(let row of boardEl.children) {
+    let charIdx = 0;
     for(let charSquare of row.children){
-      charSquare.value = null;
+      charSquare.value = board.boardArray[rowIdx][charIdx];
+      charIdx++;
     }
+    rowIdx++;
   }
 }
 
@@ -124,7 +128,12 @@ function enterLetter(evt) {
     const rowIdx = parseInt(evt.target.parentElement.id.slice(-1));
     const char = new Character(letter, letterIdx); 
     board.boardArray[rowIdx][letterIdx] = char;
+  } else if(evt.key === 'Backspace') {
+    const letterIdx = parseInt(evt.target.id.slice(-1));
+    const rowIdx = parseInt(evt.target.parentElement.id.slice(-1)); 
+    board.boardArray[rowIdx][letterIdx] = null;
   }
+  render();
 }
 
 function checkGuess() {
