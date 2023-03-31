@@ -94,10 +94,17 @@ printBtnEl.addEventListener('click', printBoard);
 /*-------------------------------- Functions --------------------------------*/
 
 function init() {
-  board.reset();
   gameIsWon = false;
   guessAttemptNum = 0;
   targetWord = getTargetWord();
+  board.reset();
+  render();
+}
+
+function render() {
+  for(let child of boardEl.children) {
+    console.log(child);
+  }
 }
 
 function handleReset() {
