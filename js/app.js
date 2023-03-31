@@ -99,6 +99,7 @@ function init() {
   targetWord = getTargetWord();
   board.reset();
   render();
+  focusFirstSquare();
 }
 
 function render() {
@@ -151,6 +152,12 @@ function existsInWord(char) {
 function isInCorrectPosition(char) {
   if(targetWord.indexOf(char) === char.idx) return true;
   return false;
+}
+
+function focusFirstSquare(){
+  const firstSquare = boardEl.children[0].children[0];
+  firstSquare.focus();
+  firstSquare.select();
 }
 
 function printBoard() {
