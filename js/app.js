@@ -81,6 +81,7 @@ const submitBtnEl = document.getElementById("submit-guess");
 const resetBtnEl = document.getElementById("reset");
 const boardEl = document.getElementById("board");
 const printBtnEl = document.getElementById("printBoard");
+const cells = document.querySelectorAll(".cell");
 
 
 /*----------------------------- Event Listeners -----------------------------*/
@@ -99,6 +100,7 @@ function init() {
   guessAttemptNum = 0;
   targetWord = getTargetWord();
   board.reset();
+  removeGlow();
   render();
   focusFirstSquare();
   console.log(`Target word is ${targetWord}`);
@@ -220,6 +222,18 @@ function focusNextInput(evt) {
 function focusInput(element) {
     element.focus();
     element.select();
+}
+
+function removeGlow() {
+  cells.forEach(cell => {
+    if(cell.classList.contains("correctAnswerGlow")){
+      cell.classList.remove("correctAnswerGlow");
+    } else if(cell.classList.contains("wrongPositionGlow")){
+      cell.classList.remove("wrongPositionGlow");
+    } else if(cell.classList.contains("wrongAnswerGlow")){
+      cell.classList.remove("wrongAnswerGlow");
+    }
+  })
 }
 
 function printBoard() {
