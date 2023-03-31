@@ -153,7 +153,7 @@ function checkGuess() {
       console.log(`${character} ${character.isInWord ? 'is' : 'is not'} in the word and ${character.isInCorrectPosition ? 'is' : 'is not'} in the correct position.`);
     })
 
-    revealGuessResults();
+    revealGuessResults(board.boardArray[guessAttemptNum]);
     checkForWinner(board.boardArray[guessAttemptNum]);
 
     if(gameIsWon) {
@@ -176,8 +176,21 @@ function checkForWinner(wordArray) {
   gameIsWon = wordArray.every(charObj => charObj.isInWord && charObj.isInCorrectPosition);
 }
 
-function revealGuessResults() {
-
+function revealGuessResults(wordArray) {
+  let charIdx = 0;
+  for(let charSquare of boardEl.children[guessAttemptNum].children){
+    if(wordArray[charIdx].isInWord && wordArray[charIdx].isInCorrectPosition) {
+      console.log(`Applying correct glow`);
+      charSquare.classList.add('correctAnswerGlow'); 
+    } else if(wordArray[charIdx].isInWord && !wordArray[charIdx].isInCorrectPosition) {
+      charSquare.classList.add('wrongPositionGlow'); 
+      console.log(`Applying wrong position glow`);
+    } else {
+      console.log(`Applying wrong answer glow`);
+      charSquare.classList.add('wrongAnswerGlow'); 
+    }
+    charIdx++;
+  }
 }
 
 function existsInWord(char) {

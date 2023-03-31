@@ -99,5 +99,67 @@ input:hover {
 .cell {
   width: 50px;
   height: 50px;
-  
+}
+
+/* Text glow and animation found here: https://www.w3schools.com/howto/howto_css_glowing_text.asp 
+Glow class represent the red X glow
+*/
+.correctAnswerGlow {
+  color: #fff;
+  -webkit-animation: correctAnswerGlow 1s ease-in-out infinite alternate;
+  -moz-animation: correctAnswerGlow 1s ease-in-out infinite alternate;
+  animation: correctAnswerGlow 1s ease-in-out infinite alternate;
+  border: none;
+  background-color: transparent;
+  pointer-events: none;
+}
+
+@-webkit-keyframes correctAnswerGlow {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #079f28, 0 0 40px #079f28, 0 0 50px #079f28, 0 0 60px #079f28, 0 0 70px #079f28;
+  }
+  to {
+    text-shadow: 0 0 20px #fff, 0 0 30px #0ac232, 0 0 40px #0ac232, 0 0 50px #0ac232, 0 0 60px #0ac232, 0 0 70px #0ac232, 0 0 80px #0ac232;
+  }
+}
+
+/* Text glow and animation found here: https://www.w3schools.com/howto/howto_css_glowing_text.asp 
+Glow2 class represent the blue O glow
+*/
+.wrongPositionGlow {
+  color: #fff;
+  -webkit-animation: wrongPositionGlow 1s ease-in-out infinite alternate;
+  -moz-animation: wrongPositionGlow 1s ease-in-out infinite alternate;
+  animation: wrongPositionGlow 1s ease-in-out infinite alternate;
+  border: none;
+  background-color: transparent;
+  pointer-events: none;
+}
+
+@-webkit-keyframes wrongPositionGlow {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #c2c727, 0 0 40px #c2c727, 0 0 50px #c2c727, 0 0 60px #c2c727, 0 0 70px #c2c727;
+  }
+  to {
+    text-shadow: 0 0 20px #fff, 0 0 30px #e2e838, 0 0 40px #e2e838, 0 0 50px #e2e838, 0 0 60px #e2e838, 0 0 70px #e2e838, 0 0 80px #e2e838;
+  }
+}
+
+.wrongAnswerGlow {
+  color: #000000;
+  -webkit-animation: wrongAnswerGlow 1s ease-in-out infinite alternate;
+  -moz-animation: wrongAnswerGlow 1s ease-in-out infinite alternate;
+  animation: wrongAnswerGlow 1s ease-in-out infinite alternate;
+  border: none;
+  background-color: transparent;
+  pointer-events: none;
+}
+
+@-webkit-keyframes wrongAnswerGlow {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #222222, 0 0 40px #222222, 0 0 50px #222222, 0 0 60px #222222, 0 0 70px #303030;
+  }
+  to {
+    text-shadow: 0 0 20px #fff, 0 0 30px #303030, 0 0 40px #303030, 0 0 50px #303030, 0 0 60px #303030, 0 0 70px #303030, 0 0 80px #303030;
+  }
 }
