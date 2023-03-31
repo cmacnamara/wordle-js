@@ -40,21 +40,17 @@ import { alphabet } from "./alphabet.js";
 /*-------------------------------- Classes --------------------------------*/
 class Board {
   constructor() {
-   this.boardArray = [
-      ['A', null, null, null, null],
+   this.boardArray;
+  }
+  reset() {
+    this.boardArray = [
+      [null, null, null, null, null],
       [null, null, null, null, null],
       [null, null, null, null, null],
       [null, null, null, null, null],
       [null, null, null, null, null],
       [null, null, null, null, null]
     ];
-  }
-  reset() {
-    this.boardArray.forEach(row => {
-      row.forEach(charObj => {
-        charObj = null;
-      })
-    })
   }
 }
 
@@ -84,6 +80,7 @@ let gameIsWon, guessAttemptNum, targetWord;
 const submitBtnEl = document.getElementById("submit-guess");
 const resetBtnEl = document.getElementById("reset");
 const boardEl = document.getElementById("board");
+const printBtnEl = document.getElementById("printBoard");
 
 
 /*----------------------------- Event Listeners -----------------------------*/
@@ -91,6 +88,7 @@ const boardEl = document.getElementById("board");
 submitBtnEl.addEventListener('click', checkGuess);
 resetBtnEl.addEventListener('click', handleReset);
 boardEl.addEventListener('keydown', enterLetter);
+printBtnEl.addEventListener('click', printBoard);
 
 
 /*-------------------------------- Functions --------------------------------*/
@@ -105,6 +103,7 @@ function init() {
 function handleReset() {
   console.log("Game reset");
   init();
+  printBoard();
 }
 
 function enterLetter(evt) {
@@ -125,7 +124,6 @@ function checkGuess() {
     const guess = board.boardArray[guessAttemptNum];
     guess.forEach(character => {
       character.isInWord = existsInWord(character);
-      console.log(character.isInWord);
       if(character.isInWord) {
         character.isInCorrectPosition = isInCorrectPosition(character);
       }
@@ -147,7 +145,7 @@ function isInCorrectPosition(char) {
 
 function printBoard() {
   board.boardArray.forEach(row => {
-    console.dir(row.join(''));
+    console.log(row.join(' - '));
   })
 }
 
