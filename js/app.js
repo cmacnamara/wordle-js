@@ -97,7 +97,8 @@ printBtnEl.addEventListener('click', printBoard);
 function init() {
   gameIsWon = false;
   guessAttemptNum = 0;
-  targetWord = getTargetWord();
+  targetWord = 'HARRY';
+  //targetWord = getTargetWord();
   board.reset();
   render();
   focusFirstSquare();
@@ -142,10 +143,10 @@ function checkGuess() {
   }
   else {
     const guess = board.boardArray[guessAttemptNum];
-    guess.forEach(character => {
+    guess.forEach((character, idx) => {
       character.isInWord = existsInWord(character);
       if(character.isInWord) {
-        character.isInCorrectPosition = isInCorrectPosition(character);
+        character.isInCorrectPosition = isInCorrectPosition(character, idx);
       }
       console.log(`${character} ${character.isInWord ? 'is' : 'is not'} in the word and ${character.isInCorrectPosition ? 'is' : 'is not'} in the correct position.`);
     })
@@ -173,8 +174,8 @@ function existsInWord(char) {
   return false;
 }
 
-function isInCorrectPosition(char) {
-  if(targetWord.indexOf(char) === char.idx) return true;
+function isInCorrectPosition(char, idx) {
+  if(targetWord.charAt(idx) === char.toString()) return true;
   return false;
 }
 
