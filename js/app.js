@@ -24,7 +24,7 @@
     // Add CSS classes to apply color to guessed characters indicating whether or not they exist in the word and are in the correct order or not
     // If game hasn’t been won and the guessAttemptNum is not 5, increment guessAttemptNum
 //// Create a function to check if an individual character exists in the target word
-// Create a checkForWin function
+//// Create a checkForWin function
 // Add functionality that prevents previous guesses to be altered and prevents users from entering input into subsequent guess rows
 // Add a favicon to the site
 //// Add Norse-themed font
@@ -97,8 +97,7 @@ printBtnEl.addEventListener('click', printBoard);
 function init() {
   gameIsWon = false;
   guessAttemptNum = 0;
-  targetWord = 'HARRY';
-  //targetWord = getTargetWord();
+  targetWord = getTargetWord();
   board.reset();
   render();
   focusFirstSquare();
@@ -124,15 +123,19 @@ function handleReset() {
 
 function enterLetter(evt) {
   const letter = evt.key.toUpperCase();
+  const letterIdx = parseInt(evt.target.id.slice(-1));
   if(alphabet.includes(letter)){
-    const letterIdx = parseInt(evt.target.id.slice(-1));
     const rowIdx = parseInt(evt.target.parentElement.id.slice(-1));
     const char = new Character(letter, letterIdx); 
     board.boardArray[rowIdx][letterIdx] = char;
   } else if(evt.key === 'Backspace') {
-    const letterIdx = parseInt(evt.target.id.slice(-1));
     const rowIdx = parseInt(evt.target.parentElement.id.slice(-1)); 
     board.boardArray[rowIdx][letterIdx] = null;
+  } else if(evt.key === 'ArrowLeft' && letterIdx > 0) {
+    console.log('move back');
+    focusInput(evt.target.previousElementSibling);
+  } else if(evt.key === 'ArrowRight' && letterIdx < 4) {
+    focusInput(evt.target.nextElementSibling);
   }
   render();
 }
