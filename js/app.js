@@ -35,6 +35,7 @@
 // STRETCH GOAL: Add level variable; gain a level on each subsequent win; display RUNE MASTER after 10 subsequent wins; reset level to 0 after loss; display level up progress; save progress in localStorage
 
 import { getTargetWord } from "./wordList.js";
+import { alphabet } from "./alphabet.js";
 
 /*-------------------------------- Classes --------------------------------*/
 class Board {
@@ -108,7 +109,9 @@ function handleReset() {
 }
 
 function enterLetter(evt) {
-  console.dir(evt.key, evt.target.parentElement);
+  console.dir(evt);
+  console.log(evt.key);
+  console.log(evt.target.parentElement.id);
 }
 
 function checkGuess(word) {
