@@ -20,7 +20,7 @@
 ////  Import the function that will access the target word
 //// Create enterLetter function
 // Create a checkGuess function
-    // Check if all 5 character have been entered; if not, display message to user indicating that they need to enter more characters (STRETCH: Have the current row shake back and forth)
+    //// Check if all 5 character have been entered; if not, display message to user indicating that they need to enter more characters (STRETCH: Have the current row shake back and forth)
     // Add CSS classes to apply color to guessed characters indicating whether or not they exist in the word and are in the correct order or not
     // If game hasn’t been won and the guessAttemptNum is not 5, increment guessAttemptNum
 // STRETCH GOAL: Add timer to sequentially reveal the correctness of each guessed letter 
@@ -88,6 +88,7 @@ const printBtnEl = document.getElementById("printBoard");
 submitBtnEl.addEventListener('click', checkGuess);
 resetBtnEl.addEventListener('click', handleReset);
 boardEl.addEventListener('keydown', enterLetter);
+boardEl.addEventListener('keyup', focusNextInput);
 printBtnEl.addEventListener('click', printBoard);
 
 
@@ -158,6 +159,19 @@ function focusFirstSquare(){
   const firstSquare = boardEl.children[0].children[0];
   firstSquare.focus();
   firstSquare.select();
+}
+
+function focusNextInput(evt) {
+  const letter = evt.key.toUpperCase();
+  if(alphabet.includes(letter)){
+    const letterIdx = parseInt(evt.target.id.slice(-1));
+    if(letterIdx !== 4) focusInput(evt.target.nextElementSibling);
+  }
+}
+
+function focusInput(element) {
+    element.focus();
+    element.select();
 }
 
 function printBoard() {
