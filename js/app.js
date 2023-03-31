@@ -26,7 +26,7 @@
 //// Create a function to check if an individual character exists in the target word
 //// Create a checkForWin function
 // Add functionality that prevents previous guesses to be altered and prevents users from entering input into subsequent guess rows
-// Add a favicon to the site
+//// Add a favicon to the site
 //// Add Norse-themed font
 // STRETCH GOAL: Add timer to sequentially reveal the correctness of each guessed letter 
 // STRETCH GOAL: Add difficulty selection to add or remove number of guesses allowed
@@ -132,7 +132,6 @@ function enterLetter(evt) {
     const rowIdx = parseInt(evt.target.parentElement.id.slice(-1)); 
     board.boardArray[rowIdx][letterIdx] = null;
   } else if(evt.key === 'ArrowLeft' && letterIdx > 0) {
-    console.log('move back');
     focusInput(evt.target.previousElementSibling);
   } else if(evt.key === 'ArrowRight' && letterIdx < 4) {
     focusInput(evt.target.nextElementSibling);
@@ -153,13 +152,22 @@ function checkGuess() {
       }
       console.log(`${character} ${character.isInWord ? 'is' : 'is not'} in the word and ${character.isInCorrectPosition ? 'is' : 'is not'} in the correct position.`);
     })
+
     revealGuessResults();
     checkForWinner(board.boardArray[guessAttemptNum]);
+
     if(gameIsWon) {
       console.log(`WE HAVE WINNER!!`);
     }
     else {
-      guessAttemptNum++;
+      if(guessAttemptNum === 5) {
+        console.log('Game over');
+      } else {
+        guessAttemptNum++;
+        console.log(`Guess attempt num is now ${guessAttemptNum}`);
+        const nextSquare = boardEl.children[guessAttemptNum].children[0];
+        focusInput(nextSquare);
+      } 
     }
   }
 }

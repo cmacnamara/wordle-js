@@ -6,3 +6,7 @@ Link to image: https://commons.wikimedia.org/wiki/File:The_Xanthos_Obelisk,_a_tr
 
 Link to license: https://creativecommons.org/licenses/by-sa/2.0/deed.en
 
+## Rune stone favicon
+
+Rune icons created by Vitaly Gorbachev - Flaticon
+"https://www.flaticon.com/free-icons/rune" 
