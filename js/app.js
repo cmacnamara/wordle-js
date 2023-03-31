@@ -40,17 +40,17 @@ import { alphabet } from "./alphabet.js";
 /*-------------------------------- Classes --------------------------------*/
 class Board {
   constructor() {
-   this.board = [
+   this.boardArray = [
+      ['A', null, null, null, null],
       [null, null, null, null, null],
       [null, null, null, null, null],
       [null, null, null, null, null],
       [null, null, null, null, null],
-      [null, null, null, null, null],
-      [null, null, null, null, null],
+      [null, null, null, null, null]
     ];
   }
   reset() {
-    this.board.forEach(row => {
+    this.boardArray.forEach(row => {
       row.forEach(charObj => {
         charObj = null;
       })
@@ -58,13 +58,15 @@ class Board {
   }
 }
 
-
 class Character {
   constructor(letter, idx){
     this.letter = letter;
     this.idx = idx;
     this.isInWord = false;
     this.isInCorrectPosition = false;
+  }
+  toString() {
+    return this.letter;
   }
 }
 
@@ -109,15 +111,25 @@ function handleReset() {
 }
 
 function enterLetter(evt) {
-  console.dir(evt);
-  console.log(evt.key);
-  console.log(evt.target.parentElement.id);
+  const letter = evt.key.toUpperCase();
+  if(alphabet.includes(letter)){
+    const letterIdx = parseInt(evt.target.id.slice(-1));
+    const rowIdx = parseInt(evt.target.parentElement.id.slice(-1));
+    const char = new Character(letter, letterIdx); 
+    board.boardArray[rowIdx][letterIdx] = char;
+  }
 }
 
 function checkGuess(word) {
   if(word.length < 5 ) {
     console.log(`Word not long enough`);
   }
+}
+
+function printBoard() {
+  board.boardArray.forEach(row => {
+    console.dir(row.join(''));
+  })
 }
 
 init();
