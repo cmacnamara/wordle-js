@@ -102,8 +102,11 @@ function init() {
 }
 
 function render() {
-  for(let child of boardEl.children) {
-    console.log(child);
+  console.log(boardEl);
+  for(let row of boardEl.children) {
+    for(let charSquare of row.children){
+      charSquare.value = null;
+    }
   }
 }
 
