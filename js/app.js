@@ -16,8 +16,9 @@
 //// Set board array elements to null
 //// Set winner to false
 //// Set guessAttemptNum to 0
-// Set targetWord to randomized word from external js file
-// Import the function that will access the target word
+//// Set targetWord to randomized word from external js file
+////  Import the function that will access the target word
+// Create enterLetter function
 // Create a checkGuess function
 // Check if all 5 character have been entered; if not, display message to user indicating that they need to enter more characters (STRETCH: Have the current row shake back and forth)
 // Add CSS classes to apply color to guessed characters indicating whether or not they exist in the word and are in the correct order or not
@@ -36,6 +37,26 @@
 import { getTargetWord } from "./wordList.js";
 
 /*-------------------------------- Classes --------------------------------*/
+class Board {
+  constructor() {
+   this.board = [
+      [null, null, null, null, null],
+      [null, null, null, null, null],
+      [null, null, null, null, null],
+      [null, null, null, null, null],
+      [null, null, null, null, null],
+      [null, null, null, null, null],
+    ];
+  }
+  reset() {
+    this.board.forEach(row => {
+      row.forEach(charObj => {
+        charObj = null;
+      })
+    })
+  }
+}
+
 
 class Character {
   constructor(letter, idx){
@@ -48,15 +69,7 @@ class Character {
 
 /*-------------------------------- Constants --------------------------------*/
 
-const board = [
-  [null, null, null, null, null],
-  [null, null, null, null, null],
-  [null, null, null, null, null],
-  [null, null, null, null, null],
-  [null, null, null, null, null],
-  [null, null, null, null, null],
-];
-
+const board = new Board();
 
 /*---------------------------- Variables (state) ----------------------------*/
 
@@ -67,22 +80,20 @@ let gameIsWon, guessAttemptNum, targetWord;
 
 const submitBtnEl = document.getElementById("submit-guess");
 const resetBtnEl = document.getElementById("reset");
+const boardEl = document.getElementById("board");
 
 
 /*----------------------------- Event Listeners -----------------------------*/
 
 submitBtnEl.addEventListener('click', handleSubmit);
 resetBtnEl.addEventListener('click', handleReset);
+boardEl.addEventListener('keydown', enterLetter);
 
 
 /*-------------------------------- Functions --------------------------------*/
 
 function init() {
-  board.forEach(row => {
-    row.forEach(charObj => {
-      charObj = null;
-    })
-  })
+  board.reset();
   gameIsWon = false;
   guessAttemptNum = 0;
   targetWord = getTargetWord();
@@ -94,6 +105,16 @@ function handleSubmit() {
 
 function handleReset() {
   console.log("Game reset");
+}
+
+function enterLetter(evt) {
+  console.dir(evt.key, evt.target.parentElement);
+}
+
+function checkGuess(word) {
+  if(word.length < 5 ) {
+    console.log(`Word not long enough`);
+  }
 }
 
 init();
