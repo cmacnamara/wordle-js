@@ -23,12 +23,12 @@
     //// Check if all 5 character have been entered; if not, display message to user indicating that they need to enter more characters (STRETCH: Have the current row shake back and forth)
     // Add CSS classes to apply color to guessed characters indicating whether or not they exist in the word and are in the correct order or not
     // If game hasn’t been won and the guessAttemptNum is not 5, increment guessAttemptNum
-// STRETCH GOAL: Add timer to sequentially reveal the correctness of each guessed letter 
-// Create a function to check if an individual character exists in the target word
+//// Create a function to check if an individual character exists in the target word
 // Create a checkForWin function
 // Add functionality that prevents previous guesses to be altered and prevents users from entering input into subsequent guess rows
 // Add a favicon to the site
-// Add Norse-themed font
+//// Add Norse-themed font
+// STRETCH GOAL: Add timer to sequentially reveal the correctness of each guessed letter 
 // STRETCH GOAL: Add difficulty selection to add or remove number of guesses allowed
 // STRETCH GOAL: Add functionality that automatically moves highlighted input to subsequent input field when a character is entered
 // STRETCH GOAL: Add sound effects to play when each character is checked and when game is won or lost
@@ -101,10 +101,10 @@ function init() {
   board.reset();
   render();
   focusFirstSquare();
+  console.log(`Target word is ${targetWord}`);
 }
 
 function render() {
-  console.log(boardEl);
   for(let row of boardEl.children) {
     for(let charSquare of row.children){
       charSquare.value = null;
@@ -115,7 +115,6 @@ function render() {
 function handleReset() {
   console.log("Game reset");
   init();
-  printBoard();
 }
 
 function enterLetter(evt) {
@@ -141,8 +140,23 @@ function checkGuess() {
       }
       console.log(`${character} ${character.isInWord ? 'is' : 'is not'} in the word and ${character.isInCorrectPosition ? 'is' : 'is not'} in the correct position.`);
     })
-    //guessAttemptNum++;
+    revealGuessResults();
+    checkForWinner(board.boardArray[guessAttemptNum]);
+    if(gameIsWon) {
+      console.log(`WE HAVE WINNER!!`);
+    }
+    else {
+      guessAttemptNum++;
+    }
   }
+}
+
+function checkForWinner(wordArray) {
+  gameIsWon = wordArray.every(charObj => charObj.isInWord && charObj.isInCorrectPosition);
+}
+
+function revealGuessResults() {
+
 }
 
 function existsInWord(char) {
@@ -181,4 +195,3 @@ function printBoard() {
 }
 
 init();
-console.log(`Target word is ${targetWord}`);
