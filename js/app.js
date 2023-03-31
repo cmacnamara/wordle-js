@@ -18,11 +18,11 @@
 //// Set guessAttemptNum to 0
 //// Set targetWord to randomized word from external js file
 ////  Import the function that will access the target word
-// Create enterLetter function
+//// Create enterLetter function
 // Create a checkGuess function
-// Check if all 5 character have been entered; if not, display message to user indicating that they need to enter more characters (STRETCH: Have the current row shake back and forth)
-// Add CSS classes to apply color to guessed characters indicating whether or not they exist in the word and are in the correct order or not
-// If game hasn’t been won and the guessAttemptNum is not 5, increment guessAttemptNum
+    // Check if all 5 character have been entered; if not, display message to user indicating that they need to enter more characters (STRETCH: Have the current row shake back and forth)
+    // Add CSS classes to apply color to guessed characters indicating whether or not they exist in the word and are in the correct order or not
+    // If game hasn’t been won and the guessAttemptNum is not 5, increment guessAttemptNum
 // STRETCH GOAL: Add timer to sequentially reveal the correctness of each guessed letter 
 // Create a function to check if an individual character exists in the target word
 // Create a checkForWin function
@@ -88,7 +88,7 @@ const boardEl = document.getElementById("board");
 
 /*----------------------------- Event Listeners -----------------------------*/
 
-submitBtnEl.addEventListener('click', handleSubmit);
+submitBtnEl.addEventListener('click', checkGuess);
 resetBtnEl.addEventListener('click', handleReset);
 boardEl.addEventListener('keydown', enterLetter);
 
@@ -102,12 +102,9 @@ function init() {
   targetWord = getTargetWord();
 }
 
-function handleSubmit() {
-  console.log("Guess submitted");
-}
-
 function handleReset() {
   console.log("Game reset");
+  init();
 }
 
 function enterLetter(evt) {
@@ -120,10 +117,32 @@ function enterLetter(evt) {
   }
 }
 
-function checkGuess(word) {
-  if(word.length < 5 ) {
-    console.log(`Word not long enough`);
+function checkGuess() {
+  if(board.boardArray[guessAttemptNum].includes(null)) {
+    console.log("Guess needs to be 5 letters long");
   }
+  else {
+    const guess = board.boardArray[guessAttemptNum];
+    guess.forEach(character => {
+      character.isInWord = existsInWord(character);
+      console.log(character.isInWord);
+      if(character.isInWord) {
+        character.isInCorrectPosition = isInCorrectPosition(character);
+      }
+      console.log(`${character} ${character.isInWord ? 'is' : 'is not'} in the word and ${character.isInCorrectPosition ? 'is' : 'is not'} in the correct position.`);
+    })
+    //guessAttemptNum++;
+  }
+}
+
+function existsInWord(char) {
+  if(targetWord.includes(char)) return true;
+  return false;
+}
+
+function isInCorrectPosition(char) {
+  if(targetWord.indexOf(char) === char.idx) return true;
+  return false;
 }
 
 function printBoard() {

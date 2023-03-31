@@ -2319,7 +2319,7 @@ const targetWords = [
 ];
 
 function getTargetWord() {
-  return targetWords[Math.floor(Math.random()*targetWords.length)];
+  return targetWords[Math.floor(Math.random()*targetWords.length)].toUpperCase();
 }
 
 export {
