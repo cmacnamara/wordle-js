@@ -76,7 +76,7 @@ const board = new Board();
 
 /*---------------------------- Variables (state) ----------------------------*/
 
-let gameIsWon, guessAttemptNum, targetWord;
+let gameIsWon, guessAttemptNum, targetWord, numWins;
 
 
 /*------------------------ Cached Element References ------------------------*/
@@ -84,7 +84,6 @@ let gameIsWon, guessAttemptNum, targetWord;
 const submitBtnEl = document.getElementById("submit-guess");
 const resetBtnEl = document.getElementById("reset");
 const boardEl = document.getElementById("board");
-const printBtnEl = document.getElementById("printBoard");
 const cells = document.querySelectorAll(".cell");
 const message = document.getElementById("message");
 
@@ -94,7 +93,6 @@ submitBtnEl.addEventListener('click', checkGuess);
 resetBtnEl.addEventListener('click', handleReset);
 boardEl.addEventListener('keydown', enterLetter);
 boardEl.addEventListener('keyup', focusNextInput);
-printBtnEl.addEventListener('click', printBoard);
 
 
 /*-------------------------------- Functions --------------------------------*/
@@ -106,6 +104,8 @@ function init() {
   //targetWord = getTargetWord();
   board.reset();
   removeGlow();
+  disableInputs();
+  enableInputForRow(0);
   updateMessage('Welcome to Nordle!');
   render();
   focusFirstSquare();
@@ -130,7 +130,6 @@ function handleReset() {
 }
 
 function enterLetter(evt) {
-  console.log(evt);
   const letter = evt.key.toUpperCase();
   const letterIdx = parseInt(evt.target.id.slice(-1));
   if(alphabet.includes(letter)){
@@ -155,7 +154,6 @@ function checkGuess() {
   if(board.boardArray[guessAttemptNum].includes(null)) {
     updateMessage('Guess needs to be 5 letters long');
   } else if(!isValidWord(board.boardArray[guessAttemptNum].join('').toLowerCase())) {
-    console.log(`not a valid word`);
     updateMessage(`'${board.boardArray[guessAttemptNum].join('')}' is not a valid word`)
   } else {
       const guess = board.boardArray[guessAttemptNum];
@@ -172,17 +170,16 @@ function checkGuess() {
     if(gameIsWon) {
       updateMessage('You win! Odin is pleased.');
       console.log(`WE HAVE WINNER!!`);
-    }
-    else {
-      if(guessAttemptNum === 5) {
-        updateMessage('You have lost. Odin is displeased.');
-        console.log('Game over');
-      } else {
-        guessAttemptNum++;
-        updateMessage(`${6 - guessAttemptNum} attempts remaining`);
-        const nextSquare = boardEl.children[guessAttemptNum].children[0];
-        focusInput(nextSquare);
-      } 
+    } else {
+        if(guessAttemptNum === 5) {
+          updateMessage('You have lost. Odin is displeased.');
+        } else {
+          guessAttemptNum++;
+          enableInputForRow(guessAttemptNum);
+          updateMessage(`${6 - guessAttemptNum} attempts remaining`);
+          const nextSquare = boardEl.children[guessAttemptNum].children[0];
+          focusInput(nextSquare);
+        } 
     }
   }
 }
@@ -195,11 +192,11 @@ function revealGuessResults(wordArray) {
   let charIdx = 0;
   for(let charSquare of boardEl.children[guessAttemptNum].children){
     if(wordArray[charIdx].isInWord && wordArray[charIdx].isInCorrectPosition) {
-      charSquare.classList.add('correctAnswerGlow'); 
+      charSquare.classList.add('correctAnswerGlow', 'disable-input'); 
     } else if(wordArray[charIdx].isInWord && !wordArray[charIdx].isInCorrectPosition) {
-      charSquare.classList.add('wrongPositionGlow'); 
+      charSquare.classList.add('wrongPositionGlow', 'disable-input'); 
     } else {
-      charSquare.classList.add('wrongAnswerGlow'); 
+      charSquare.classList.add('wrongAnswerGlow', 'disable-input'); 
     }
     charIdx++;
   }
@@ -243,6 +240,27 @@ function removeGlow() {
     } else if(cell.classList.contains("wrongAnswerGlow")){
       cell.classList.remove("wrongAnswerGlow");
     }
+    if(cell.classList.contains("disable-input")){
+      cell.classList.remove("disable-input");
+    }
+  })
+}
+
+function enableInputForRow(rowNum) {
+  cells.forEach(cell => {
+    let currentRowNum = parseInt(cell.parentElement.id.slice(-1));
+    if(currentRowNum === rowNum && cell.classList.contains("disable-input")){
+      cell.classList.remove("disable-input");
+    }
+  })
+}
+
+function disableInputs() {
+  cells.forEach(cell => {
+    let currentRowNum = cell.parentElement.id.slice(-1);
+    if(currentRowNum > 0){
+      cell.classList.add('disable-input');
+    }
   })
 }
 
@@ -257,5 +275,3 @@ function updateMessage(msg) {
 }
 
 init();
-console.log(isValidWord('bahus'));
-console.log(isValidWord('fffff'));

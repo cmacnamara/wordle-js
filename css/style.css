@@ -97,9 +97,11 @@ input:hover {
   height: 50px;
 }
 
-/* Text glow and animation found here: https://www.w3schools.com/howto/howto_css_glowing_text.asp 
-Glow class represent the red X glow
-*/
+.disable-input {
+  pointer-events: none;
+}
+
+/* Text glow and animation found here: https://www.w3schools.com/howto/howto_css_glowing_text.asp */
 .correctAnswerGlow {
   color: #fff;
   -webkit-animation: correctAnswerGlow 1s ease-in-out infinite alternate;
@@ -107,7 +109,6 @@ Glow class represent the red X glow
   animation: correctAnswerGlow 1s ease-in-out infinite alternate;
   border: none;
   background-color: transparent;
-  pointer-events: none;
 }
 
 @-webkit-keyframes correctAnswerGlow {
@@ -119,9 +120,6 @@ Glow class represent the red X glow
   }
 }
 
-/* Text glow and animation found here: https://www.w3schools.com/howto/howto_css_glowing_text.asp 
-Glow2 class represent the blue O glow
-*/
 .wrongPositionGlow {
   color: #fff;
   -webkit-animation: wrongPositionGlow 1s ease-in-out infinite alternate;
@@ -129,7 +127,6 @@ Glow2 class represent the blue O glow
   animation: wrongPositionGlow 1s ease-in-out infinite alternate;
   border: none;
   background-color: transparent;
-  pointer-events: none;
 }
 
 @-webkit-keyframes wrongPositionGlow {
@@ -148,7 +145,6 @@ Glow2 class represent the blue O glow
   animation: wrongAnswerGlow 1s ease-in-out infinite alternate;
   border: none;
   background-color: transparent;
-  pointer-events: none;
 }
 
 @-webkit-keyframes wrongAnswerGlow {
