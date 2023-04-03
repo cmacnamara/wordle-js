@@ -249,6 +249,9 @@ function removeGlow() {
     if(cell.classList.contains("disable-input")){
       cell.classList.remove("disable-input");
     }
+    cell.classList.remove('animate__animated', 'animate__fadeIn');
+    cell.offsetHeight;
+    cell.classList.add('animate__animated', 'animate__fadeIn');
   })
 }
 
