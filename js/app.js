@@ -30,7 +30,7 @@
 //// Add Norse-themed font
 // Add README
 //// Render messages in the DOM
-// Fix bug dealing with duplicate correct letters displaying correct color
+//// Fix bug dealing with duplicate correct letters displaying correct color
 // See if there's anywhere else in the code where I can use the "cells" element array
 // STRETCH GOAL: Add timer to sequentially reveal the correctness of each guessed letter 
 // STRETCH GOAL: Add difficulty selection to add or remove number of guesses allowed
@@ -102,7 +102,7 @@ boardEl.addEventListener('keyup', focusNextInput);
 function init() {
   gameIsWon = false;
   guessAttemptNum = 0;
-  targetWord = 'BABOO';
+  targetWord = 'FEMME';
   //targetWord = getTargetWord();
   targetWordTallyObj = buildCharacterTally(targetWord);
   console.log(targetWordTallyObj);
@@ -155,16 +155,15 @@ function enterLetter(evt) {
 }
 
 function checkGuess() {
-  const guessCharTally = {};
+  
   if(board.boardArray[guessAttemptNum].includes(null)) {
     updateMessage('Guess needs to be 5 letters long');
   } else if(!isValidWord(board.boardArray[guessAttemptNum].join('').toLowerCase())) {
     updateMessage(`'${board.boardArray[guessAttemptNum].join('')}' is not a valid word`)
   } else {
       const guess = board.boardArray[guessAttemptNum];
+      const guessCharTally = buildCharacterTally(guess.join(''));
       guess.forEach((character, idx) => {
-        if(guessCharTally[character]) guessCharTally[character]++;
-        else guessCharTally[character] = 1;
         console.log(`Tally for ${character} is ${guessCharTally[character]}`);
         character.isInWord = existsInWord(character);
         if(character.isInWord) {
