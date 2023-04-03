@@ -32,7 +32,11 @@
 //// Render messages in the DOM
 //// Fix bug dealing with duplicate correct letters displaying correct color
 // See if there's anywhere else in the code where I can use the "cells" element array
-// STRETCH GOAL: Add timer to sequentially reveal the correctness of each guessed letter 
+// Make buttons pretty
+// Make design responsive at smaller widths
+// Ensure board stays centered on stone image
+// STRETCH GOAL: Make entire board glow red on loss
+//// STRETCH GOAL: Add timer to sequentially reveal the correctness of each guessed letter 
 // STRETCH GOAL: Add difficulty selection to add or remove number of guesses allowed
 //// STRETCH GOAL: Add functionality that automatically moves highlighted input to subsequent input field when a character is entered
 // STRETCH GOAL: Add sound effects to play when each character is checked and when game is won or lost
@@ -102,10 +106,9 @@ boardEl.addEventListener('keyup', focusNextInput);
 function init() {
   gameIsWon = false;
   guessAttemptNum = 0;
-  targetWord = 'FEMME';
-  //targetWord = getTargetWord();
+  //targetWord = 'FEMME';
+  targetWord = getTargetWord();
   targetWordTallyObj = buildCharacterTally(targetWord);
-  console.log(targetWordTallyObj);
   board.reset();
   removeGlow();
   disableInputs();
@@ -155,7 +158,6 @@ function enterLetter(evt) {
 }
 
 function checkGuess() {
-  
   if(board.boardArray[guessAttemptNum].includes(null)) {
     updateMessage('Guess needs to be 5 letters long');
   } else if(!isValidWord(board.boardArray[guessAttemptNum].join('').toLowerCase())) {
@@ -164,13 +166,13 @@ function checkGuess() {
       const guess = board.boardArray[guessAttemptNum];
       const guessCharTally = buildCharacterTally(guess.join(''));
       guess.forEach((character, idx) => {
-        console.log(`Tally for ${character} is ${guessCharTally[character]}`);
         character.isInWord = existsInWord(character);
         if(character.isInWord) {
           character.isInCorrectPosition = isInCorrectPosition(character, idx);
           if(!character.isInCorrectPosition) {
             // If the number of the letter's occurences in the guess is greater than the number of its occurences in the target word 
-            if(guessCharTally[character] > targetWordTallyObj[character]) character.isExcessDuplicate = true;
+            if(guessCharTally[character] > targetWordTallyObj[character]) 
+              character.isExcessDuplicate = true;
           }
         }
       })
@@ -183,7 +185,7 @@ function checkGuess() {
       console.log(`WE HAVE WINNER!!`);
     } else {
         if(guessAttemptNum === 5) {
-          updateMessage('You have lost. Odin is displeased.');
+          updateMessage(`Your word was ${targetWord}. Odin is most displeased!`);
         } else {
           guessAttemptNum++;
           enableInputForRow(guessAttemptNum);
@@ -210,7 +212,6 @@ function revealGuessResults(wordArray) {
 function buildCharacterTally(word) {
   const charArray = word.split('');
   const characterTally = {};
-  console.log(charArray);
   charArray.forEach(char => {
     if(characterTally[char]) characterTally[char]++;
     else characterTally[char] = 1;
