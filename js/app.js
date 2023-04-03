@@ -38,7 +38,7 @@
 // STRETCH GOAL: Add sound effects to play when each character is checked and when game is won or lost
 // STRETCH GOAL: Add level variable; gain a level on each subsequent win; display RUNE MASTER after 10 subsequent wins; reset level to 0 after loss; display level up progress; save progress in localStorage
 
-import { getTargetWord } from "./wordList.js";
+import { getTargetWord, isValidWord } from "./wordList.js";
 import { alphabet } from "./alphabet.js";
 
 /*-------------------------------- Classes --------------------------------*/
@@ -102,10 +102,11 @@ printBtnEl.addEventListener('click', printBoard);
 function init() {
   gameIsWon = false;
   guessAttemptNum = 0;
-  targetWord = getTargetWord();
+  targetWord = 'TAFFY';
+  //targetWord = getTargetWord();
   board.reset();
   removeGlow();
-  updateMessage();
+  updateMessage('Welcome to Nordle!');
   render();
   focusFirstSquare();
   console.log(`Target word is ${targetWord}`);
@@ -148,7 +149,11 @@ function enterLetter(evt) {
 
 function checkGuess() {
   if(board.boardArray[guessAttemptNum].includes(null)) {
+    updateMessage('Guess needs to be 5 letters long');
     console.log("Guess needs to be 5 letters long");
+  } else if(!isValidWord(board.boardArray[guessAttemptNum].join('').toLowerCase())) {
+    console.log(board.boardArray[guessAttemptNum].join('').toLowerCase());
+    console.log(`not a valid word`);
   } else {
       const guess = board.boardArray[guessAttemptNum];
       guess.forEach((character, idx) => {
@@ -162,16 +167,16 @@ function checkGuess() {
     checkForWinner(board.boardArray[guessAttemptNum]);
 
     if(gameIsWon) {
-      updateMessage();
+      updateMessage('You win! Odin is pleased.');
       console.log(`WE HAVE WINNER!!`);
     }
     else {
       if(guessAttemptNum === 5) {
-        updateMessage();
+        updateMessage('You have lost. Odin is displeased.');
         console.log('Game over');
       } else {
         guessAttemptNum++;
-        console.log(`Guess attempt num is now ${guessAttemptNum}`);
+        updateMessage(`${6 - guessAttemptNum} attempts remaining`);
         const nextSquare = boardEl.children[guessAttemptNum].children[0];
         focusInput(nextSquare);
       } 
@@ -244,14 +249,10 @@ function printBoard() {
   })
 }
 
-function updateMessage() {
-  if(guessAttemptNum === 0 && !gameIsWon) {
-    message.textContent = 'Welcome to Nordle!!'
-  } else if (gameIsWon){
-    message.textContent = 'You have won! Odin is pleased.'
-  } else if (guessAttemptNum === 5 && !gameIsWon) {
-    message.textContent = 'You have lost. Odin is displeased.'
-  }
+function updateMessage(msg) {
+  message.textContent = msg;
 }
 
 init();
+console.log(isValidWord('bahus'));
+console.log(isValidWord('fffff'));
