@@ -25,11 +25,11 @@
     //// If game hasn’t been won and the guessAttemptNum is not 5, increment guessAttemptNum
 //// Create a function to check if an individual character exists in the target word
 //// Create a checkForWin function
-// Add functionality that prevents previous guesses to be altered and prevents users from entering input into subsequent guess rows
+//// Add functionality that prevents previous guesses to be altered and prevents users from entering input into subsequent guess rows
 //// Add a favicon to the site
 //// Add Norse-themed font
 // Add README
-// Render messages in the DOM
+//// Render messages in the DOM
 // Fix bug dealing with duplicate correct letters displaying correct color
 // See if there's anywhere else in the code where I can use the "cells" element array
 // STRETCH GOAL: Add timer to sequentially reveal the correctness of each guessed letter 
@@ -106,7 +106,7 @@ function init() {
   removeGlow();
   disableInputs();
   enableInputForRow(0);
-  updateMessage('Welcome to Nordle!');
+  updateMessage('Enter Odin\'s runes');
   render();
   focusFirstSquare();
   console.log(`Target word is ${targetWord}`);
@@ -191,6 +191,13 @@ function checkForWinner(wordArray) {
 function revealGuessResults(wordArray) {
   let charIdx = 0;
   for(let charSquare of boardEl.children[guessAttemptNum].children){
+    delayResultReveal(wordArray, charSquare, charIdx);
+    charIdx++;
+  }
+}
+
+function delayResultReveal(wordArray, charSquare, charIdx) {
+  setTimeout(function() {
     if(wordArray[charIdx].isInWord && wordArray[charIdx].isInCorrectPosition) {
       charSquare.classList.add('correctAnswerGlow', 'disable-input'); 
     } else if(wordArray[charIdx].isInWord && !wordArray[charIdx].isInCorrectPosition) {
@@ -198,8 +205,7 @@ function revealGuessResults(wordArray) {
     } else {
       charSquare.classList.add('wrongAnswerGlow', 'disable-input'); 
     }
-    charIdx++;
-  }
+  }, 250 * charIdx);
 }
 
 function existsInWord(char) {
