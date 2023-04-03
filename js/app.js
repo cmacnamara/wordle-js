@@ -130,6 +130,7 @@ function handleReset() {
 }
 
 function enterLetter(evt) {
+  console.log(evt);
   const letter = evt.key.toUpperCase();
   const letterIdx = parseInt(evt.target.id.slice(-1));
   if(alphabet.includes(letter)){
@@ -143,17 +144,19 @@ function enterLetter(evt) {
     focusInput(evt.target.previousElementSibling);
   } else if(evt.key === 'ArrowRight' && letterIdx < 4) {
     focusInput(evt.target.nextElementSibling);
+  } else if(evt.key === 'Enter') {
+    checkGuess();
   }
+  
   render();
 }
 
 function checkGuess() {
   if(board.boardArray[guessAttemptNum].includes(null)) {
     updateMessage('Guess needs to be 5 letters long');
-    console.log("Guess needs to be 5 letters long");
   } else if(!isValidWord(board.boardArray[guessAttemptNum].join('').toLowerCase())) {
-    console.log(board.boardArray[guessAttemptNum].join('').toLowerCase());
     console.log(`not a valid word`);
+    updateMessage(`'${board.boardArray[guessAttemptNum].join('')}' is not a valid word`)
   } else {
       const guess = board.boardArray[guessAttemptNum];
       guess.forEach((character, idx) => {
