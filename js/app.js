@@ -19,18 +19,22 @@
 //// Set targetWord to randomized word from external js file
 ////  Import the function that will access the target word
 //// Create enterLetter function
-// Create a checkGuess function
+//// Create a checkGuess function
     //// Check if all 5 character have been entered; if not, display message to user indicating that they need to enter more characters (STRETCH: Have the current row shake back and forth)
-    // Add CSS classes to apply color to guessed characters indicating whether or not they exist in the word and are in the correct order or not
-    // If game hasn’t been won and the guessAttemptNum is not 5, increment guessAttemptNum
+    //// Add CSS classes to apply color to guessed characters indicating whether or not they exist in the word and are in the correct order or not
+    //// If game hasn’t been won and the guessAttemptNum is not 5, increment guessAttemptNum
 //// Create a function to check if an individual character exists in the target word
 //// Create a checkForWin function
 // Add functionality that prevents previous guesses to be altered and prevents users from entering input into subsequent guess rows
 //// Add a favicon to the site
 //// Add Norse-themed font
+// Add README
+// Render messages in the DOM
+// Fix bug dealing with duplicate correct letters displaying correct color
+// See if there's anywhere else in the code where I can use the "cells" element array
 // STRETCH GOAL: Add timer to sequentially reveal the correctness of each guessed letter 
 // STRETCH GOAL: Add difficulty selection to add or remove number of guesses allowed
-// STRETCH GOAL: Add functionality that automatically moves highlighted input to subsequent input field when a character is entered
+//// STRETCH GOAL: Add functionality that automatically moves highlighted input to subsequent input field when a character is entered
 // STRETCH GOAL: Add sound effects to play when each character is checked and when game is won or lost
 // STRETCH GOAL: Add level variable; gain a level on each subsequent win; display RUNE MASTER after 10 subsequent wins; reset level to 0 after loss; display level up progress; save progress in localStorage
 
@@ -82,7 +86,7 @@ const resetBtnEl = document.getElementById("reset");
 const boardEl = document.getElementById("board");
 const printBtnEl = document.getElementById("printBoard");
 const cells = document.querySelectorAll(".cell");
-
+const message = document.getElementById("message");
 
 /*----------------------------- Event Listeners -----------------------------*/
 
@@ -101,6 +105,7 @@ function init() {
   targetWord = getTargetWord();
   board.reset();
   removeGlow();
+  updateMessage();
   render();
   focusFirstSquare();
   console.log(`Target word is ${targetWord}`);
@@ -144,25 +149,25 @@ function enterLetter(evt) {
 function checkGuess() {
   if(board.boardArray[guessAttemptNum].includes(null)) {
     console.log("Guess needs to be 5 letters long");
-  }
-  else {
-    const guess = board.boardArray[guessAttemptNum];
-    guess.forEach((character, idx) => {
-      character.isInWord = existsInWord(character);
-      if(character.isInWord) {
-        character.isInCorrectPosition = isInCorrectPosition(character, idx);
-      }
-      console.log(`${character} ${character.isInWord ? 'is' : 'is not'} in the word and ${character.isInCorrectPosition ? 'is' : 'is not'} in the correct position.`);
-    })
+  } else {
+      const guess = board.boardArray[guessAttemptNum];
+      guess.forEach((character, idx) => {
+        character.isInWord = existsInWord(character);
+        if(character.isInWord) {
+          character.isInCorrectPosition = isInCorrectPosition(character, idx);
+        }
+      })
 
     revealGuessResults(board.boardArray[guessAttemptNum]);
     checkForWinner(board.boardArray[guessAttemptNum]);
 
     if(gameIsWon) {
+      updateMessage();
       console.log(`WE HAVE WINNER!!`);
     }
     else {
       if(guessAttemptNum === 5) {
+        updateMessage();
         console.log('Game over');
       } else {
         guessAttemptNum++;
@@ -182,13 +187,10 @@ function revealGuessResults(wordArray) {
   let charIdx = 0;
   for(let charSquare of boardEl.children[guessAttemptNum].children){
     if(wordArray[charIdx].isInWord && wordArray[charIdx].isInCorrectPosition) {
-      console.log(`Applying correct glow`);
       charSquare.classList.add('correctAnswerGlow'); 
     } else if(wordArray[charIdx].isInWord && !wordArray[charIdx].isInCorrectPosition) {
       charSquare.classList.add('wrongPositionGlow'); 
-      console.log(`Applying wrong position glow`);
     } else {
-      console.log(`Applying wrong answer glow`);
       charSquare.classList.add('wrongAnswerGlow'); 
     }
     charIdx++;
@@ -240,6 +242,16 @@ function printBoard() {
   board.boardArray.forEach(row => {
     console.log(row.join(' - '));
   })
+}
+
+function updateMessage() {
+  if(guessAttemptNum === 0 && !gameIsWon) {
+    message.textContent = 'Welcome to Nordle!!'
+  } else if (gameIsWon){
+    message.textContent = 'You have won! Odin is pleased.'
+  } else if (guessAttemptNum === 5 && !gameIsWon) {
+    message.textContent = 'You have lost. Odin is displeased.'
+  }
 }
 
 init();

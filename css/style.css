@@ -88,12 +88,8 @@ input:hover {
   align-items: center;
   /* border: solid black 3px; */
   min-width: 33%;
-  margin-top: 15vh;
+  margin-top: 10vh;
   gap: 7px;
-}
-
-#row0 {
-  
 }
 
 .cell {
