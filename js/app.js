@@ -64,6 +64,7 @@ class Character {
     this.idx = idx;
     this.isInWord = false;
     this.isInCorrectPosition = false;
+    this.isExcessDuplicate = false;
   }
   toString() {
     return this.letter;
@@ -73,10 +74,11 @@ class Character {
 /*-------------------------------- Constants --------------------------------*/
 
 const board = new Board();
+const REVEAL_SPEED = 250;
 
 /*---------------------------- Variables (state) ----------------------------*/
 
-let gameIsWon, guessAttemptNum, targetWord, numWins;
+let gameIsWon, guessAttemptNum, targetWord, targetWordTallyObj, numWins;
 
 
 /*------------------------ Cached Element References ------------------------*/
@@ -100,8 +102,10 @@ boardEl.addEventListener('keyup', focusNextInput);
 function init() {
   gameIsWon = false;
   guessAttemptNum = 0;
-  targetWord = 'TAFFY';
+  targetWord = 'BABOO';
   //targetWord = getTargetWord();
+  targetWordTallyObj = buildCharacterTally(targetWord);
+  console.log(targetWordTallyObj);
   board.reset();
   removeGlow();
   disableInputs();
@@ -151,6 +155,7 @@ function enterLetter(evt) {
 }
 
 function checkGuess() {
+  const guessCharTally = {};
   if(board.boardArray[guessAttemptNum].includes(null)) {
     updateMessage('Guess needs to be 5 letters long');
   } else if(!isValidWord(board.boardArray[guessAttemptNum].join('').toLowerCase())) {
@@ -158,9 +163,16 @@ function checkGuess() {
   } else {
       const guess = board.boardArray[guessAttemptNum];
       guess.forEach((character, idx) => {
+        if(guessCharTally[character]) guessCharTally[character]++;
+        else guessCharTally[character] = 1;
+        console.log(`Tally for ${character} is ${guessCharTally[character]}`);
         character.isInWord = existsInWord(character);
         if(character.isInWord) {
           character.isInCorrectPosition = isInCorrectPosition(character, idx);
+          if(!character.isInCorrectPosition) {
+            // If the number of the letter's occurences in the guess is greater than the number of its occurences in the target word 
+            if(guessCharTally[character] > targetWordTallyObj[character]) character.isExcessDuplicate = true;
+          }
         }
       })
 
@@ -196,16 +208,27 @@ function revealGuessResults(wordArray) {
   }
 }
 
+function buildCharacterTally(word) {
+  const charArray = word.split('');
+  const characterTally = {};
+  console.log(charArray);
+  charArray.forEach(char => {
+    if(characterTally[char]) characterTally[char]++;
+    else characterTally[char] = 1;
+  })
+  return characterTally;
+}
+
 function delayResultReveal(wordArray, charSquare, charIdx) {
   setTimeout(function() {
     if(wordArray[charIdx].isInWord && wordArray[charIdx].isInCorrectPosition) {
       charSquare.classList.add('correctAnswerGlow', 'disable-input'); 
-    } else if(wordArray[charIdx].isInWord && !wordArray[charIdx].isInCorrectPosition) {
+    } else if(wordArray[charIdx].isInWord && !wordArray[charIdx].isInCorrectPosition && !wordArray[charIdx].isExcessDuplicate) {
       charSquare.classList.add('wrongPositionGlow', 'disable-input'); 
     } else {
       charSquare.classList.add('wrongAnswerGlow', 'disable-input'); 
     }
-  }, 250 * charIdx);
+  }, REVEAL_SPEED * charIdx);
 }
 
 function existsInWord(char) {
