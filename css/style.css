@@ -61,11 +61,14 @@ body {
   font-family: 'norseregular', sans-serif;
   font-size: 40px;
   margin-top: 80px;
+  padding: 10px;
+  /* color: black; */
   background-color: rgba(130, 130, 130, 0.5);
   width: 33%;
   border-radius: 10px;
   border: solid 2px rgba(79, 79, 78,0.75);
   box-shadow: inset 0 0 10px #000000;
+  text-shadow: rgb(255, 255, 255) 1px 0 10px;
 }
 
 input {
@@ -93,7 +96,7 @@ input:hover {
   align-items: center;
   /* border: solid black 3px; */
   min-width: 33%;
-  margin-top: 10vh;
+  margin-top: 8vh;
   gap: 7px; 
 }
 
@@ -173,4 +176,15 @@ button:active {
   to {
     text-shadow: 0 0 20px #fafafa, 0 0 30px #303030, 0 0 40px #303030, 0 0 50px #303030, 0 0 60px #303030, 0 0 70px #303030, 0 0 80px #303030;
   }
+}
+
+.messageGlow {
+  background-color: white;
+  color: white;
+}
+
+@-webkit-keyframes messageGlow {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); } 
 }

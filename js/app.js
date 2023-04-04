@@ -32,7 +32,7 @@
 //// Render messages in the DOM
 //// Fix bug dealing with duplicate correct letters displaying correct color
 // See if there's anywhere else in the code where I can use the "cells" element array
-// Make buttons pretty
+//// Make buttons pretty
 // Make design responsive at smaller widths
 // Ensure board stays centered on stone image
 // STRETCH GOAL: Make entire board glow red on loss
@@ -107,7 +107,7 @@ boardEl.addEventListener('keyup', focusNextInput);
 function init() {
   gameIsWon = false;
   guessAttemptNum = 0;
-  //targetWord = 'FEMME';
+  //targetWord = 'ARTSY';
   targetWord = getTargetWord();
   targetWordTallyObj = buildCharacterTally(targetWord);
   board.reset();
@@ -165,8 +165,10 @@ function checkGuess() {
     updateMessage(`'${board.boardArray[guessAttemptNum].join('')}' is not a valid word`)
   } else {
       const guess = board.boardArray[guessAttemptNum];
-      const guessCharTally = buildCharacterTally(guess.join(''));
+      const guessCharTally = {};
       guess.forEach((character, idx) => {
+        if(guessCharTally[character]) guessCharTally[character]++;
+        else guessCharTally[character] = 1;
         character.isInWord = existsInWord(character);
         if(character.isInWord) {
           character.isInCorrectPosition = isInCorrectPosition(character, idx);
