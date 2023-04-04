@@ -8,8 +8,7 @@ The correctness of your guess will be revealed by the resulting color of each le
 
 Try to win 10 games in a row to become a Rune Master!
 
-## [Play the game here](https://www.google.com)
-(Edit link after deployment)
+## [Play the game here](https://nordle-game.netlify.app/)
 
 ## Technologies used 💻
  
