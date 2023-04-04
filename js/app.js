@@ -265,7 +265,6 @@ function displayNumWins() {
 function displayRank() {
   console.log(`num wins is ${numWins}`);
   if(numWins <= 0) {
-    console.log(`setting uninitiated`);
     rankDisplayEl.textContent = `Rank: Uninitiated`;
   }
   else if(numWins > 0 && numWins < 2) 
