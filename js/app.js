@@ -41,7 +41,7 @@
 //// STRETCH GOAL: Add functionality that automatically moves highlighted input to subsequent input field when a character is entered
 // STRETCH GOAL: Add sound effects to play when each character is checked and when game is won or lost
 //STRECH GOAL: Add dark mode
-// STRETCH GOAL: Add level variable; gain a level on each subsequent win; display RUNE MASTER after 10 subsequent wins; reset level to 0 after loss; display level up progress; save progress in localStorage
+//// STRETCH GOAL: Add level variable; gain a level on each subsequent win; display RUNE MASTER after 10 subsequent wins; reset level to 0 after loss; display level up progress; save progress in localStorage
 
 import { getTargetWord, isValidWord } from "./wordList.js";
 import { alphabet } from "./alphabet.js";
@@ -142,12 +142,6 @@ function handleReset() {
   init();
 }
 
-function handleResetWins() {
-  numWins = 0;
-  localStorage.setItem("numWins", numWins);
-  renderPlayerStats();
-}
-
 function enterLetter(evt) {
   const letter = evt.key.toUpperCase();
   const letterIdx = parseInt(evt.target.id.slice(-1));
@@ -213,11 +207,6 @@ function checkGuess() {
   }
 }
 
-function renderPlayerStats(){
-  getNumWins();
-  displayRank();
-}
-
 function checkForWinner(wordArray) {
   gameIsWon = wordArray.every(charObj => charObj.isInWord && charObj.isInCorrectPosition);
 }
@@ -252,14 +241,34 @@ function buildCharacterTally(word) {
   return characterTally;
 }
 
+function handleResetWins() {
+  numWins = 0;
+  localStorage.setItem("numWins", numWins);
+  renderPlayerStats();
+}
+
+function renderPlayerStats(){
+  getNumWins();
+  displayRank();
+}
+
 function getNumWins() {
   if(localStorage.getItem("numWins")) numWins = localStorage.getItem("numWins");
   else numWins = 0;
+  displayNumWins();
+}
+
+function displayNumWins() {
   winsDisplayEl.textContent = `No. consecutive wins: ${numWins}`
 }
 
 function displayRank() {
-  if(numWins >= 0 && numWins < 2) 
+  console.log(`num wins is ${numWins}`);
+  if(numWins <= 0) {
+    console.log(`setting uninitiated`);
+    rankDisplayEl.textContent = `Rank: Uninitiated`;
+  }
+  else if(numWins > 0 && numWins < 2) 
     rankDisplayEl.textContent = `Rank: Initiate`;
   else if(numWins >= 2 && numWins < 4) 
     rankDisplayEl.textContent = `Rank: Journeyman`;
@@ -269,7 +278,7 @@ function displayRank() {
     rankDisplayEl.textContent = `Rank: Acolyte`;
   else if(numWins >= 8 && numWins < 10) 
     rankDisplayEl.textContent = `Rank: Advanced`;
-  else
+  else if(numWins >= 10) 
     rankDisplayEl.textContent = `Rank: RUNE MASTER`;
 }
 
