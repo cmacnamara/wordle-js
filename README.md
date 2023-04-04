@@ -25,7 +25,8 @@ Try to win 10 games in a row to become a Rune Master!
 
 
 ## Ice Box 🧊
-- [] Add functionality to store users' progress towards Rune Master on local machine
+- [X] Add functionality to store users' progress towards Rune Master on local machine
+- [] Add responsive css rules to handle window resizing
 - [] Add light/dark mode options
 - [] Add difficulty selection feature to add/remove number of guesses allowed
 - [] Make win/loss messages glow with red or green
