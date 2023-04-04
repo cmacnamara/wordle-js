@@ -90,6 +90,7 @@ let gameIsWon, guessAttemptNum, targetWord, targetWordTallyObj, numWins;
 
 const submitBtnEl = document.getElementById("submit-guess");
 const resetBtnEl = document.getElementById("reset");
+const resetWinsBtnEl = document.getElementById("reset-wins");
 const boardEl = document.getElementById("board");
 const cells = document.querySelectorAll(".cell");
 const message = document.getElementById("message");
@@ -100,6 +101,7 @@ const rankDisplayEl = document.getElementById("rank-display");
 
 submitBtnEl.addEventListener('click', checkGuess);
 resetBtnEl.addEventListener('click', handleReset);
+resetWinsBtnEl.addEventListener('click', handleResetWins);
 boardEl.addEventListener('keydown', enterLetter);
 boardEl.addEventListener('keyup', focusNextInput);
 
@@ -110,8 +112,7 @@ function init() {
   gameIsWon = false;
   guessAttemptNum = 0;
   //targetWord = 'ARTSY';
-  getNumWins();
-  displayRank();
+  renderPlayerStats();
   targetWord = getTargetWord();
   targetWordTallyObj = buildCharacterTally(targetWord);
   board.reset();
@@ -139,6 +140,12 @@ function render() {
 function handleReset() {
   console.log("Game reset");
   init();
+}
+
+function handleResetWins() {
+  numWins = 0;
+  localStorage.setItem("numWins", numWins);
+  renderPlayerStats();
 }
 
 function enterLetter(evt) {
@@ -191,6 +198,7 @@ function checkGuess() {
       updateMessage('You win! Odin is pleased.');
       numWins++;
       localStorage.setItem("numWins", numWins);
+      renderPlayerStats();
     } else {
         if(guessAttemptNum === 5) {
           updateMessage(`Your word was ${targetWord}. Odin is most displeased!`);
@@ -203,6 +211,11 @@ function checkGuess() {
         } 
     }
   }
+}
+
+function renderPlayerStats(){
+  getNumWins();
+  displayRank();
 }
 
 function checkForWinner(wordArray) {
