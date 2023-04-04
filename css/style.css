@@ -1,3 +1,4 @@
+/* Font found here: https://www.dafont.com/norse.font */
 @font-face {
   font-family: 'norseregular';
   src: url('../assets/fonts/norse-kawl-webfont.woff2') format('woff2'),
@@ -8,7 +9,7 @@
 
 html {
   box-sizing: border-box;
-  
+  background-color: black;
 }
 
 *,
@@ -40,7 +41,7 @@ body {
   min-height: 100%;
   background-image: url('../assets/obelisk.png');
   background-repeat: no-repeat;
-  background-size: cover;
+  /* background-size: cover; */
   background-position: top;
   background-attachment: fixed;
   display: flex;
@@ -69,7 +70,7 @@ body {
 
 input {
   text-transform: uppercase;
-  font-family: 'norseregular';
+  font-family: 'norseregular', sans-serif;
   background-color: rgba(156,156,156,0.5);
   color: rgba(136, 8, 8, 0.65);
   border-radius: 10px;
@@ -93,8 +94,24 @@ input:hover {
   /* border: solid black 3px; */
   min-width: 33%;
   margin-top: 10vh;
-  gap: 7px;
-  
+  gap: 7px; 
+}
+
+button {
+  background-color: rgba(156,156,156,0.5);
+  box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.5);
+  font-family: 'norseregular', sans-serif;
+  font-size: 30px;
+  border: solid gray 2px;
+}
+
+button:active {
+  transform: scale(0.98);
+  box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.5);
+}
+
+#btn-group {
+  margin-top: 10px;
 }
 
 .cell {

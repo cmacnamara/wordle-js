@@ -40,6 +40,7 @@
 // STRETCH GOAL: Add difficulty selection to add or remove number of guesses allowed
 //// STRETCH GOAL: Add functionality that automatically moves highlighted input to subsequent input field when a character is entered
 // STRETCH GOAL: Add sound effects to play when each character is checked and when game is won or lost
+//STRECH GOAL: Add dark mode
 // STRETCH GOAL: Add level variable; gain a level on each subsequent win; display RUNE MASTER after 10 subsequent wins; reset level to 0 after loss; display level up progress; save progress in localStorage
 
 import { getTargetWord, isValidWord } from "./wordList.js";
