@@ -269,15 +269,15 @@ function displayRank() {
     rankDisplayEl.textContent = `Rank: Uninitiated`;
   }
   else if(numWins > 0 && numWins < 2) 
-    rankDisplayEl.textContent = `Rank: Initiate`;
+    rankDisplayEl.textContent = `Rank: Thrall`;
   else if(numWins >= 2 && numWins < 4) 
-    rankDisplayEl.textContent = `Rank: Journeyman`;
+    rankDisplayEl.textContent = `Rank: Karl`;
   else if(numWins >= 4 && numWins < 6) 
-    rankDisplayEl.textContent = `Rank: Apprentice`;
+    rankDisplayEl.textContent = `Rank: Earl`;
   else if(numWins >= 6 && numWins < 8) 
-    rankDisplayEl.textContent = `Rank: Acolyte`;
+    rankDisplayEl.textContent = `Rank: Jarl`;
   else if(numWins >= 8 && numWins < 10) 
-    rankDisplayEl.textContent = `Rank: Advanced`;
+    rankDisplayEl.textContent = `Rank: Royal`;
   else if(numWins >= 10) 
     rankDisplayEl.textContent = `Rank: RUNE MASTER`;
 }
