@@ -93,6 +93,8 @@ const resetBtnEl = document.getElementById("reset");
 const boardEl = document.getElementById("board");
 const cells = document.querySelectorAll(".cell");
 const message = document.getElementById("message");
+const winsDisplayEl = document.getElementById("wins-display");
+const rankDisplayEl = document.getElementById("rank-display");
 
 /*----------------------------- Event Listeners -----------------------------*/
 
@@ -108,6 +110,8 @@ function init() {
   gameIsWon = false;
   guessAttemptNum = 0;
   //targetWord = 'ARTSY';
+  getNumWins();
+  displayRank();
   targetWord = getTargetWord();
   targetWordTallyObj = buildCharacterTally(targetWord);
   board.reset();
@@ -185,7 +189,8 @@ function checkGuess() {
 
     if(gameIsWon) {
       updateMessage('You win! Odin is pleased.');
-      console.log(`WE HAVE WINNER!!`);
+      numWins++;
+      localStorage.setItem("numWins", numWins);
     } else {
         if(guessAttemptNum === 5) {
           updateMessage(`Your word was ${targetWord}. Odin is most displeased!`);
@@ -212,16 +217,6 @@ function revealGuessResults(wordArray) {
   }
 }
 
-function buildCharacterTally(word) {
-  const charArray = word.split('');
-  const characterTally = {};
-  charArray.forEach(char => {
-    if(characterTally[char]) characterTally[char]++;
-    else characterTally[char] = 1;
-  })
-  return characterTally;
-}
-
 function delayResultReveal(wordArray, charSquare, charIdx) {
   setTimeout(function() {
     if(wordArray[charIdx].isInWord && wordArray[charIdx].isInCorrectPosition) {
@@ -232,6 +227,37 @@ function delayResultReveal(wordArray, charSquare, charIdx) {
       charSquare.classList.add('wrongAnswerGlow', 'disable-input'); 
     }
   }, REVEAL_SPEED * charIdx);
+}
+
+function buildCharacterTally(word) {
+  const charArray = word.split('');
+  const characterTally = {};
+  charArray.forEach(char => {
+    if(characterTally[char]) characterTally[char]++;
+    else characterTally[char] = 1;
+  })
+  return characterTally;
+}
+
+function getNumWins() {
+  if(localStorage.getItem("numWins")) numWins = localStorage.getItem("numWins");
+  else numWins = 0;
+  winsDisplayEl.textContent = `No. consecutive wins: ${numWins}`
+}
+
+function displayRank() {
+  if(numWins >= 0 && numWins < 2) 
+    rankDisplayEl.textContent = `Rank: Initiate`;
+  else if(numWins >= 2 && numWins < 4) 
+    rankDisplayEl.textContent = `Rank: Journeyman`;
+  else if(numWins >= 4 && numWins < 6) 
+    rankDisplayEl.textContent = `Rank: Apprentice`;
+  else if(numWins >= 6 && numWins < 8) 
+    rankDisplayEl.textContent = `Rank: Acolyte`;
+  else if(numWins >= 8 && numWins < 10) 
+    rankDisplayEl.textContent = `Rank: Advanced`;
+  else
+    rankDisplayEl.textContent = `Rank: RUNE MASTER`;
 }
 
 function existsInWord(char) {

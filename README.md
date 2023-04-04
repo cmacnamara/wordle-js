@@ -4,7 +4,7 @@ Image will go here
 
 Nordle is a Wordle re-creation with a Norse mythology-inspired theme. The objective of the game is to guess the secret 5-letter word in as few tries as possible. To play, simply type out your 5-letter guess word. Note that the word must be a valid English word in order to count. To submit your guess, either hit the Submit Guess button or press Enter. 
 
-The correct of your guess will be revealed by the resulting color of each letter. A green letter indicates that the letter is in the the secret word and is in the correct position; a yellow letter indicates that the letter is in the word, but is in the incorrect position; a black letter indicates that the letter is not in the word, or that there are no more of that letter in the word.  
+The correctness of your guess will be revealed by the resulting color of each letter. A green letter indicates that the letter is in the the secret word and is in the correct position; a yellow letter indicates that the letter is in the word, but is in the incorrect position; a black letter indicates either that the letter is not in the word, or that there are no more of that letter in the word.  
 
 Try to win 10 games in a row to become a Rune Master!
 

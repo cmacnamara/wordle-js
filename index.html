@@ -21,7 +21,11 @@
 </head>
 <body>
   <div class="vignette" id="main-container">
-    <h1 id="title">NORDLE</h1>
+    <header>
+      <h2 id="wins-display"></h2>
+      <h1 id="title">NORDLE</h1>
+      <h2 id="rank-display"></h2>
+    </header>
     <div id="board">
       <div id="row0">
         <input type="text" maxlength="1" class="cell animate__animated animate__fadeIn" id="sq0">
@@ -68,7 +72,7 @@
     </div>
     <div id="btn-group">
       <button id="submit-guess">Submit Guess</button>
-      <button id="reset">Reset</button>
+      <button id="reset">new game</button>
     </div>
     
     <h2 id="message" class="messageGlow"><span id="msg-text" class="animate__animated animate__fadeIn"></span></h2>
