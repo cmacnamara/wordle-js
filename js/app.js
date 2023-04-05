@@ -113,7 +113,7 @@ function init() {
   gameIsWon = false;
   guessAttemptNum = 0;
   renderPlayerStats();
-  //targetWord = 'MADAM';
+  //targetWord = 'TEETH';
   targetWord = getTargetWord();
   board.reset();
   removeGlow();
@@ -164,26 +164,32 @@ function enterLetter(evt) {
 }
 
 function checkGuess() {
+
+  let testStr = 'FOODS';
+  let testReplace = testStr.replace('O', '-');
+  console.log(testReplace);
+
+
   if(board.boardArray[guessAttemptNum].includes(null)) {
     updateMessage('Guess needs to be 5 letters long');
   } else if(!isValidWord(board.boardArray[guessAttemptNum].join('').toLowerCase())) {
     updateMessage(`'${board.boardArray[guessAttemptNum].join('')}' is not a valid word`)
   } else {
-    const guess = board.boardArray[guessAttemptNum].join('');
-    let targetWordCopy = targetWord;
-    const resultColors = ['gray', 'gray', 'gray', 'gray', 'gray'];
-    for (let i = 0; i < guess.length; i++) {
-      if(guess[i] === targetWordCopy[i]) {
-        resultColors[i] = 'green';
-        targetWordCopy = targetWordCopy.replace(guess[i], ' ');
-      } 
-    }
-    for (let i = 0; i < guess.length; i++) {
-      if(resultColors[i] !== 'green' && targetWordCopy.includes(guess[i])) {
-        resultColors[i] = 'yellow';
-        targetWordCopy = targetWordCopy.replace(guess[i], ' ');
+    let targetChars = targetWord.split('');
+    const resultColors = [null, null, null, null, null];
+
+    board.boardArray[guessAttemptNum].forEach((guessChar, idx) => {
+      if(guessChar.toString() === targetChars[idx]) {
+        resultColors[idx] = 'green';
+        targetChars[idx] = null;
       }
-    }
+    })
+    board.boardArray[guessAttemptNum].forEach((guessChar, idx) => {
+      if(resultColors[idx] !== 'green' && targetChars.includes(guessChar.toString())) {
+        resultColors[idx] = 'yellow';
+        targetChars[targetChars.indexOf(guessChar.toString())] = null;
+      }
+    })
 
     revealGuessResults(resultColors);
     checkForWinner(resultColors);
