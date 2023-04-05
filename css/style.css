@@ -216,6 +216,23 @@ button:hover {
   }
 }
 
+.lossGlow {
+  color: #ffffff;
+  -webkit-animation: wrongAnswerGlow 1s ease-in-out infinite alternate;
+  -moz-animation: wrongAnswerGlow 1s ease-in-out infinite alternate;
+  animation: wrongAnswerGlow 1s ease-in-out infinite alternate;
+  background-color: rgba(255, 0, 0, 0.276);
+}
+
+@-webkit-keyframes lossGlow {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #c70000, 0 0 40px #c70000, 0 0 50px #c70000, 0 0 60px #c70000, 0 0 70px #c70000;
+  }
+  to {
+    text-shadow: 0 0 20px #fff, 0 0 30px #ff1c1c, 0 0 40px #ff1c1c, 0 0 50px #ff1c1c, 0 0 60px #ff1c1c, 0 0 70px #ff1c1c, 0 0 80px #ff1c1c;
+  }
+}
+
 .messageGlow {
   background-color: white;
   color: white;

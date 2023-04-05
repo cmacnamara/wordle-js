@@ -34,7 +34,7 @@
 //// Fix bug dealing with duplicate correct letters displaying correct color
 // See if there's anywhere else in the code where I can use the "cells" element array
 //// Add button hover effect
-// get message to fade in whenever its updated
+//// get message to fade in whenever its updated
 //// lower buttons down when screen size is big
 //// Make buttons pretty
 //// Make design responsive at smaller widths
@@ -84,6 +84,7 @@ class Character {
 
 const board = new Board();
 const REVEAL_SPEED = 250;
+const LOSS_REVEAL_SPEED = 150;
 
 /*---------------------------- Variables (state) ----------------------------*/
 
@@ -203,6 +204,7 @@ function checkGuess() {
           localStorage.setItem("numWins", 0)
           setNumWins();
           renderPlayerStats();
+          revealLossResult();
         } else {
           guessAttemptNum++;
           enableInputForRow(guessAttemptNum);
@@ -308,6 +310,9 @@ function removeGlow() {
     if(cell.classList.contains("disable-input")){
       cell.classList.remove("disable-input");
     }
+    if(cell.classList.contains("lossGlow")){
+      cell.classList.remove("lossGlow");
+    }
     cell.classList.remove('animate__animated', 'animate__fadeIn');
     cell.offsetHeight;
     cell.classList.add('animate__animated', 'animate__fadeIn');
@@ -337,6 +342,20 @@ function updateMessage(msg) {
   message.offsetHeight;
   message.textContent = msg;
   message.classList.add('animate__animated', 'animate__fadeIn');
+}
+
+function revealLossResult() {
+  let idx = 0;
+  cells.forEach(cell => {
+    delayLossReveal(cell, idx);
+    idx++;
+  })
+}
+
+function delayLossReveal(cell, idx) {
+  setTimeout(function() {
+    cell.classList.add('lossGlow');
+  }, LOSS_REVEAL_SPEED * idx);
 }
 
 init();
