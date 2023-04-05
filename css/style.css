@@ -232,10 +232,18 @@ button:active {
   button {
     font-size: 20px;
   }
+
   #wins-display,
-#rank-display {
-  font-size: 20px;
-}
+  #rank-display {
+    font-size: 20px;
+    margin: 0 0px;
+    width: 150px;
+  }
+
+  header {
+    gap: 0.5em;
+    margin: 5px 0px;
+  }
 }
 
 /* @media screen and (max-device-width: 480px){
