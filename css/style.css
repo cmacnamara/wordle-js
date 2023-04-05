@@ -57,8 +57,9 @@ header {
   display: flex;
   width: 100%;
   justify-content: center;
-  gap: 20px;
-  margin: 10px 20px;
+  align-items: center;
+  gap: 5em;
+  margin: 5px 20px;
   font-family: 'norseregular', sans-serif;
 }
 
@@ -73,24 +74,25 @@ header {
   text-align: center;
   font-size: 50px;
   margin: 0;
-  padding: 5px 0;
+  padding: 0px 0;
   /* margin-right: 100px; */
 }
 
 #message {
   text-align: center;
   font-family: 'norseregular', sans-serif;
-  font-size: 40px;
+  font-size: 30px;
   margin-top: 30px;
+  margin-bottom: 0;
   background-color: transparent;
   width: 100%;
 }
 
 #msg-text {
-  background-color: rgba(130, 130, 130, 0.5);
-  border-radius: 10px;
+  /* background-color: rgba(130, 130, 130, 0.5); */
+  /* border-radius: 10px;
   border: solid 2px rgba(79, 79, 78,0.75);
-  box-shadow: inset 0 0 10px #000000;
+  box-shadow: inset 0 0 10px #000000; */
   text-shadow: rgb(255, 255, 255) 1px 0 10px;
   padding: 10px;
   width: 100%;
@@ -124,7 +126,7 @@ input:hover {
   align-items: center;
   /* border: solid black 3px; */
   min-width: 33%;
-  margin-top: 8vh;
+  margin-top: 1em;
   gap: 7px; 
 }
 
@@ -169,15 +171,7 @@ button:active {
   background-color: transparent;
 }
 
-@keyframes correctAnswerGlow {
-  from {
-    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #079f28, 0 0 40px #079f28, 0 0 50px #079f28, 0 0 60px #079f28, 0 0 70px #079f28;
-  }
-  to {
-    text-shadow: 0 0 20px #fff, 0 0 30px #0ac232, 0 0 40px #0ac232, 0 0 50px #0ac232, 0 0 60px #0ac232, 0 0 70px #0ac232, 0 0 80px #0ac232;
-  }
-}
-/* 
+
 @-webkit-keyframes correctAnswerGlow {
   from {
     text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #079f28, 0 0 40px #079f28, 0 0 50px #079f28, 0 0 60px #079f28, 0 0 70px #079f28;
@@ -185,7 +179,7 @@ button:active {
   to {
     text-shadow: 0 0 20px #fff, 0 0 30px #0ac232, 0 0 40px #0ac232, 0 0 50px #0ac232, 0 0 60px #0ac232, 0 0 70px #0ac232, 0 0 80px #0ac232;
   }
-} */
+}
 
 .wrongPositionGlow {
   color: #fff;
@@ -195,7 +189,7 @@ button:active {
   background-color: transparent;
 }
 
-@keyframes wrongPositionGlow {
+@-webkit-keyframes wrongPositionGlow {
   from {
     text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #c2c727, 0 0 40px #c2c727, 0 0 50px #c2c727, 0 0 60px #c2c727, 0 0 70px #c2c727;
   }
@@ -212,7 +206,7 @@ button:active {
   background-color: transparent;
 }
 
-@keyframes wrongAnswerGlow {
+@-webkit-keyframes wrongAnswerGlow {
   from {
     text-shadow: 0 0 10px #373737, 0 0 20px #fff, 0 0 30px #222222, 0 0 40px #222222, 0 0 50px #222222, 0 0 60px #222222, 0 0 70px #303030;
   }
@@ -226,7 +220,7 @@ button:active {
   color: white;
 }
 
-@keyframes messageGlow {
+@-webkit-keyframes messageGlow {
   0% { transform: scale(1); }
   50% { transform: scale(1.1); }
   100% { transform: scale(1); } 

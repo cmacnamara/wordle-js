@@ -253,7 +253,7 @@ function setNumWins() {
 }
 
 function displayNumWins() {
-  winsDisplayEl.textContent = `No. consecutive wins: ${numWins}`
+  winsDisplayEl.textContent = `streak: ${numWins}`
 }
 
 function displayRank() {
