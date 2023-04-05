@@ -94,7 +94,7 @@ const resetBtnEl = document.getElementById("reset");
 const resetWinsBtnEl = document.getElementById("reset-wins");
 const boardEl = document.getElementById("board");
 const cells = document.querySelectorAll(".cell");
-const message = document.getElementById("message");
+const message = document.getElementById("msg-text");
 const winsDisplayEl = document.getElementById("wins-display");
 const rankDisplayEl = document.getElementById("rank-display");
 
@@ -164,12 +164,6 @@ function enterLetter(evt) {
 }
 
 function checkGuess() {
-
-  let testStr = 'FOODS';
-  let testReplace = testStr.replace('O', '-');
-  console.log(testReplace);
-
-
   if(board.boardArray[guessAttemptNum].includes(null)) {
     updateMessage('Guess needs to be 5 letters long');
   } else if(!isValidWord(board.boardArray[guessAttemptNum].join('').toLowerCase())) {
