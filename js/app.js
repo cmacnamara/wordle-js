@@ -33,9 +33,9 @@
 //// Render messages in the DOM
 //// Fix bug dealing with duplicate correct letters displaying correct color
 // See if there's anywhere else in the code where I can use the "cells" element array
-// Add button hover effect
+//// Add button hover effect
 // get message to fade in whenever its updated
-// lower buttons down when screen size is big
+//// lower buttons down when screen size is big
 //// Make buttons pretty
 //// Make design responsive at smaller widths
 //// Ensure board stays centered on stone image

@@ -1,6 +1,6 @@
 # NORDLE
 
-Image will go here
+![A partially completed game of Nordle with two incorrect guesses](./assets/nordle-screenshot.png)
 
 Nordle is a Wordle re-creation with a Norse mythology-inspired theme. The objective of the game is to guess the secret 5-letter word in as few tries as possible. To play, simply type out your 5-letter guess word. Note that the word must be a valid English word in order to count. To submit your guess, either hit the Submit Guess button or press Enter. 
 
