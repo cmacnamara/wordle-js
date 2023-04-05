@@ -29,13 +29,16 @@
 //// Add a favicon to the site
 //// Add Norse-themed font
 // Update README with image
-// Fix bug when target word is 'gamut' and guess is 'trait' versus word is 'madam' and guess is 'mommy'
+//// Fix bug when target word is 'gamut' and guess is 'trait' versus word is 'madam' and guess is 'mommy'
 //// Render messages in the DOM
 //// Fix bug dealing with duplicate correct letters displaying correct color
 // See if there's anywhere else in the code where I can use the "cells" element array
+// Add button hover effect
+// get message to fade in whenever its updated
+// lower buttons down when screen size is big
 //// Make buttons pretty
-// Make design responsive at smaller widths
-// Ensure board stays centered on stone image
+//// Make design responsive at smaller widths
+//// Ensure board stays centered on stone image
 // STRETCH GOAL: Make entire board glow red on loss
 //// STRETCH GOAL: Add timer to sequentially reveal the correctness of each guessed letter 
 // STRETCH GOAL: Add difficulty selection to add or remove number of guesses allowed
