@@ -28,7 +28,7 @@
 //// Add functionality that prevents previous guesses to be altered and prevents users from entering input into subsequent guess rows
 //// Add a favicon to the site
 //// Add Norse-themed font
-// Update README with image
+//// Update README with image
 //// Fix bug when target word is 'gamut' and guess is 'trait' versus word is 'madam' and guess is 'mommy'
 //// Render messages in the DOM
 //// Fix bug dealing with duplicate correct letters displaying correct color
@@ -333,7 +333,10 @@ function disableInputs() {
 }
 
 function updateMessage(msg) {
+  message.classList.remove('animate__animated', 'animate__fadeIn');
+  message.offsetHeight;
   message.textContent = msg;
+  message.classList.add('animate__animated', 'animate__fadeIn');
 }
 
 init();
