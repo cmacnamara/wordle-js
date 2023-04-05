@@ -28,7 +28,8 @@
 //// Add functionality that prevents previous guesses to be altered and prevents users from entering input into subsequent guess rows
 //// Add a favicon to the site
 //// Add Norse-themed font
-// Add README
+// Update README with image
+// Fix bug when target word is 'gamut' and guess is 'trait' versus word is 'madam' and guess is 'mommy'
 //// Render messages in the DOM
 //// Fix bug dealing with duplicate correct letters displaying correct color
 // See if there's anywhere else in the code where I can use the "cells" element array
@@ -111,10 +112,9 @@ boardEl.addEventListener('keyup', focusNextInput);
 function init() {
   gameIsWon = false;
   guessAttemptNum = 0;
-  //targetWord = 'ARTSY';
   renderPlayerStats();
+  //targetWord = 'MADAM';
   targetWord = getTargetWord();
-  targetWordTallyObj = buildCharacterTally(targetWord);
   board.reset();
   removeGlow();
   disableInputs();
@@ -169,24 +169,24 @@ function checkGuess() {
   } else if(!isValidWord(board.boardArray[guessAttemptNum].join('').toLowerCase())) {
     updateMessage(`'${board.boardArray[guessAttemptNum].join('')}' is not a valid word`)
   } else {
-      const guess = board.boardArray[guessAttemptNum];
-      const guessCharTally = {};
-      guess.forEach((character, idx) => {
-        if(guessCharTally[character]) guessCharTally[character]++;
-        else guessCharTally[character] = 1;
-        character.isInWord = existsInWord(character);
-        if(character.isInWord) {
-          character.isInCorrectPosition = isInCorrectPosition(character, idx);
-          if(!character.isInCorrectPosition) {
-            // If the number of the letter's occurences in the guess is greater than the number of its occurences in the target word 
-            if(guessCharTally[character] > targetWordTallyObj[character]) 
-              character.isExcessDuplicate = true;
-          }
-        }
-      })
+    const guess = board.boardArray[guessAttemptNum].join('');
+    let targetWordCopy = targetWord;
+    const resultColors = ['gray', 'gray', 'gray', 'gray', 'gray'];
+    for (let i = 0; i < guess.length; i++) {
+      if(guess[i] === targetWordCopy[i]) {
+        resultColors[i] = 'green';
+        targetWordCopy = targetWordCopy.replace(guess[i], ' ');
+      } 
+    }
+    for (let i = 0; i < guess.length; i++) {
+      if(resultColors[i] !== 'green' && targetWordCopy.includes(guess[i])) {
+        resultColors[i] = 'yellow';
+        targetWordCopy = targetWordCopy.replace(guess[i], ' ');
+      }
+    }
 
-    revealGuessResults(board.boardArray[guessAttemptNum]);
-    checkForWinner(board.boardArray[guessAttemptNum]);
+    revealGuessResults(resultColors);
+    checkForWinner(resultColors);
 
     if(gameIsWon) {
       updateMessage('You win! Odin is pleased.');
@@ -196,6 +196,10 @@ function checkGuess() {
     } else {
         if(guessAttemptNum === 5) {
           updateMessage(`Your word was ${targetWord}. Odin is most displeased!`);
+          numWins = 0;
+          localStorage.setItem("numWins", 0)
+          setNumWins();
+          renderPlayerStats();
         } else {
           guessAttemptNum++;
           enableInputForRow(guessAttemptNum);
@@ -207,38 +211,28 @@ function checkGuess() {
   }
 }
 
-function checkForWinner(wordArray) {
-  gameIsWon = wordArray.every(charObj => charObj.isInWord && charObj.isInCorrectPosition);
+function checkForWinner(resultColors) {
+  gameIsWon = resultColors.every(resultColor => resultColor === 'green');
 }
 
-function revealGuessResults(wordArray) {
+function revealGuessResults(resultColors) {
   let charIdx = 0;
   for(let charSquare of boardEl.children[guessAttemptNum].children){
-    delayResultReveal(wordArray, charSquare, charIdx);
+    delayResultReveal(resultColors, charSquare, charIdx);
     charIdx++;
   }
 }
 
-function delayResultReveal(wordArray, charSquare, charIdx) {
+function delayResultReveal(resultColors, charSquare, charIdx) {
   setTimeout(function() {
-    if(wordArray[charIdx].isInWord && wordArray[charIdx].isInCorrectPosition) {
+    if(resultColors[charIdx] === 'green') {
       charSquare.classList.add('correctAnswerGlow', 'disable-input'); 
-    } else if(wordArray[charIdx].isInWord && !wordArray[charIdx].isInCorrectPosition && !wordArray[charIdx].isExcessDuplicate) {
+    } else if(resultColors[charIdx] === 'yellow') {
       charSquare.classList.add('wrongPositionGlow', 'disable-input'); 
     } else {
       charSquare.classList.add('wrongAnswerGlow', 'disable-input'); 
     }
   }, REVEAL_SPEED * charIdx);
-}
-
-function buildCharacterTally(word) {
-  const charArray = word.split('');
-  const characterTally = {};
-  charArray.forEach(char => {
-    if(characterTally[char]) characterTally[char]++;
-    else characterTally[char] = 1;
-  })
-  return characterTally;
 }
 
 function handleResetWins() {
@@ -248,11 +242,11 @@ function handleResetWins() {
 }
 
 function renderPlayerStats(){
-  getNumWins();
+  setNumWins();
   displayRank();
 }
 
-function getNumWins() {
+function setNumWins() {
   if(localStorage.getItem("numWins")) numWins = localStorage.getItem("numWins");
   else numWins = 0;
   displayNumWins();
@@ -263,7 +257,6 @@ function displayNumWins() {
 }
 
 function displayRank() {
-  console.log(`num wins is ${numWins}`);
   if(numWins <= 0) {
     rankDisplayEl.textContent = `Rank: Uninitiated`;
   }
@@ -279,16 +272,6 @@ function displayRank() {
     rankDisplayEl.textContent = `Rank: Royal`;
   else if(numWins >= 10) 
     rankDisplayEl.textContent = `Rank: RUNE MASTER`;
-}
-
-function existsInWord(char) {
-  if(targetWord.includes(char)) return true;
-  return false;
-}
-
-function isInCorrectPosition(char, idx) {
-  if(targetWord.charAt(idx) === char.toString()) return true;
-  return false;
 }
 
 function focusFirstSquare(){
@@ -343,12 +326,6 @@ function disableInputs() {
     if(currentRowNum > 0){
       cell.classList.add('disable-input');
     }
-  })
-}
-
-function printBoard() {
-  board.boardArray.forEach(row => {
-    console.log(row.join(' - '));
   })
 }
 
