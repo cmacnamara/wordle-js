@@ -7,3 +7,8 @@ Nordle uses 'The Xanthos Obelisk' image taken by Carole Raddato and can be found
 Nordle uses a Rune icon favicon created by Vitaly Gorbachev available from [flaticon](https://www.flaticon.com/free-icons/rune)
 
 Nordle uses Animate.css created by Daniel Eden, Elton Mesquita, and Waren Gonzaga. The package is licensed under the MIT License found [here](https://github.com/animate-css/animate.css/blob/master/LICENSE). Animate.css can be found [here](https://animate.style/).
+
+Nordle uses several sound effects all available from [freesound.org](https://freesound.org/):
+- ["Stone Grind"](https://freesound.org/people/j1987/sounds/95007/) by user j1987
+- ["Thor transitions"](https://freesound.org/people/Robinhood76/sounds/165191/) by user Robinhood76
+- ["Heavenly Pad Verb"](https://freesound.org/people/TannerSound/sounds/478265/) by user TannerSound
