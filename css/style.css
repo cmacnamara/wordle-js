@@ -78,7 +78,6 @@ header {
   font-size: 50px;
   margin: 0;
   padding: 0px 0;
-  /* margin-right: 100px; */
 }
 
 #message {
@@ -133,7 +132,7 @@ button {
   font-size: 30px;
   border: solid gray 2px;
   color: black;
-  transition: 0.5s;
+  transition: 0.25s;
 }
 
 button:active {

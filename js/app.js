@@ -39,7 +39,7 @@
 //// Make buttons pretty
 //// Make design responsive at smaller widths
 //// Ensure board stays centered on stone image
-// STRETCH GOAL: Make entire board glow red on loss
+//// STRETCH GOAL: Make entire board glow red on loss
 //// STRETCH GOAL: Add timer to sequentially reveal the correctness of each guessed letter 
 // STRETCH GOAL: Add difficulty selection to add or remove number of guesses allowed
 //// STRETCH GOAL: Add functionality that automatically moves highlighted input to subsequent input field when a character is entered
