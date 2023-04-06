@@ -199,7 +199,7 @@ function checkGuess() {
       renderPlayerStats();
     } else {
         if(guessAttemptNum === 5) {
-          updateMessage(`Your word was ${targetWord}. Odin is most displeased!`);
+          updateMessage(`You lose! Odin's runes: ${targetWord}`);
           numWins = 0;
           localStorage.setItem("numWins", 0)
           setNumWins();
@@ -208,7 +208,7 @@ function checkGuess() {
         } else {
           guessAttemptNum++;
           enableInputForRow(guessAttemptNum);
-          updateMessage(`${6 - guessAttemptNum} attempts remaining`);
+          updateMessage(`${6 - guessAttemptNum} attempt${guessAttemptNum === 5 ? '' : 's'} remaining`);
           const nextSquare = boardEl.children[guessAttemptNum].children[0];
           focusInput(nextSquare);
         } 
