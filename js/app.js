@@ -1,51 +1,6 @@
-//// Add HTML element to display title of game
-//// Add HTML element to display status (won game, lost, or current guess attempt number)
-//// Add a container div to represent the board 
-//// Add 6 divs within the container div that represent each word row
-//// Add 5 HTML input elements within each word row div to represent each character of each word
-//// Add an HTML button element to submit each guess
-//// Add a cached element reference for the submit guess button
-//// Add an event listener to the submit guess button
-//// Add HTML button to reset the game and choose new word
-//// Add a cached element reference for the reset button
-//// Add an event listener to the reset button
-//// Create a 2-D array variable to represent the board. Will contain character objects
-//// Create character class, which contains variables letter, isInWord, isInCorrectPosition
-//// Add variables for winner (boolean), guessAttemptNum, targetWord
-//// Add init function
-//// Set board array elements to null
-//// Set winner to false
-//// Set guessAttemptNum to 0
-//// Set targetWord to randomized word from external js file
-////  Import the function that will access the target word
-//// Create enterLetter function
-//// Create a checkGuess function
-    //// Check if all 5 character have been entered; if not, display message to user indicating that they need to enter more characters (STRETCH: Have the current row shake back and forth)
-    //// Add CSS classes to apply color to guessed characters indicating whether or not they exist in the word and are in the correct order or not
-    //// If game hasn’t been won and the guessAttemptNum is not 5, increment guessAttemptNum
-//// Create a function to check if an individual character exists in the target word
-//// Create a checkForWin function
-//// Add functionality that prevents previous guesses to be altered and prevents users from entering input into subsequent guess rows
-//// Add a favicon to the site
-//// Add Norse-themed font
-//// Update README with image
-//// Fix bug when target word is 'gamut' and guess is 'trait' versus word is 'madam' and guess is 'mommy'
-//// Render messages in the DOM
-//// Fix bug dealing with duplicate correct letters displaying correct color
 // See if there's anywhere else in the code where I can use the "cells" element array
-//// Add button hover effect
-//// get message to fade in whenever its updated
-//// lower buttons down when screen size is big
-//// Make buttons pretty
-//// Make design responsive at smaller widths
-//// Ensure board stays centered on stone image
-//// STRETCH GOAL: Make entire board glow red on loss
-//// STRETCH GOAL: Add timer to sequentially reveal the correctness of each guessed letter 
 // STRETCH GOAL: Add difficulty selection to add or remove number of guesses allowed
-//// STRETCH GOAL: Add functionality that automatically moves highlighted input to subsequent input field when a character is entered
-// STRETCH GOAL: Add sound effects to play when each character is checked and when game is won or lost
-//STRECH GOAL: Add dark mode
-//// STRETCH GOAL: Add level variable; gain a level on each subsequent win; display RUNE MASTER after 10 subsequent wins; reset level to 0 after loss; display level up progress; save progress in localStorage
+// STRECH GOAL: Add dark mode
 
 import { getTargetWord, isValidWord } from "./wordList.js";
 import { alphabet } from "./alphabet.js";
@@ -115,7 +70,6 @@ function init() {
   gameIsWon = false;
   guessAttemptNum = 0;
   renderPlayerStats();
-  //targetWord = 'TEETH';
   targetWord = getTargetWord();
   board.reset();
   removeGlow();

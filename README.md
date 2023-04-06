@@ -32,5 +32,6 @@ Check out my initial planning materials [here](https://docs.google.com/document/
 - [x] Add responsive CSS rules to handle window resizing
 - [ ] Add light/dark mode options
 - [ ] Add difficulty selection feature to add/remove number of guesses allowed
-- [ ] Make win/loss messages glow with red or green
-- [ ] Add sound effects
+- [x] Add sound effects
+- [ ] Modify CSS to handle larger screen sizes 
+- [ ] Add modal with game rules and options
