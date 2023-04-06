@@ -2,14 +2,16 @@
 
 ![A partially completed game of Nordle with two incorrect guesses](./assets/nordle-screenshot.png)
 
-Nordle is a Wordle re-creation with a Norse mythology-inspired theme. The objective of the game is to guess the secret 5-letter word in as few tries as possible. To play, simply type out your 5-letter guess word. Note that the word must be a valid English word. To submit your guess, either hit the Submit Guess button or press Enter. 
+Nordle is a Wordle re-creation with a Norse mythology-inspired theme. The original game, Wordle, was created by Welsh software engineer Josh Wardle and was originally published in 2021. In 2022, the game was bought by the New York Times Company which now maintains and publishes it. 
 
-The correctness of your guess will be revealed by the resulting color of each letter. A green letter indicates that the letter is in the secret word and is in the correct position; a yellow letter indicates that the letter is in the word, but is in the incorrect position; a black letter indicates either that the letter is not in the word, or that there are no more of that letter in the word.  
+The objective of the game is to guess the secret five-letter word within six attempts. To play, simply type out your five-letter guess word. Note that the word must be a valid English word. To submit your guess, either hit the Submit Guess button or press Enter. 
+
+The correctness of your guess will be revealed by the resulting color of each tile/letter. A green tile indicates that the letter is in the secret word and is in the correct position; a yellow tile indicates that the letter is in the word, but is in the incorrect position; a black letter indicates either that the letter is not in the word, or that there are no more of that letter in the word. Note that in the game, 'letters' are referred to as 'runes'.  
 
 Try to win 10 games in a row to become a Rune Master!
 
 ## [Play the game here](https://nordle-game.netlify.app/)
-Check out my initial planning materals [here](https://docs.google.com/document/d/1c42hRy14MzApsnWahGEokt59xeHNBhvgrLpR9Z4fE9A/edit)
+Check out my initial planning materials [here](https://docs.google.com/document/d/1c42hRy14MzApsnWahGEokt59xeHNBhvgrLpR9Z4fE9A/edit)
 
 ## Technologies used 💻
  
