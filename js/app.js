@@ -49,6 +49,7 @@
 
 import { getTargetWord, isValidWord } from "./wordList.js";
 import { alphabet } from "./alphabet.js";
+import { playButtonSound, playWinSound, playLoseSound } from "./audio.js";
 
 /*-------------------------------- Classes --------------------------------*/
 class Board {
@@ -139,6 +140,7 @@ function render() {
 }
 
 function handleReset() {
+  playButtonSound();
   init();
 }
 
@@ -164,6 +166,7 @@ function enterLetter(evt) {
 }
 
 function checkGuess() {
+  playButtonSound();
   if(board.boardArray[guessAttemptNum].includes(null)) {
     updateMessage('Not enough runes');
   } else if(!isValidWord(board.boardArray[guessAttemptNum].join('').toLowerCase())) {
@@ -189,12 +192,14 @@ function checkGuess() {
     checkForWinner(resultColors);
 
     if(gameIsWon) {
+      playWinSound();
       updateMessage('You win! Odin is pleased.');
       numWins++;
       localStorage.setItem("numWins", numWins);
       renderPlayerStats();
     } else {
         if(guessAttemptNum === 5) {
+          playLoseSound();
           updateMessage(`You lose! Odin's runes: ${targetWord}`);
           numWins = 0;
           localStorage.setItem("numWins", 0)
@@ -237,6 +242,7 @@ function delayResultReveal(resultColors, charSquare, charIdx) {
 }
 
 function handleResetWins() {
+  playButtonSound();
   numWins = 0;
   localStorage.setItem("numWins", numWins);
   rankDisplayEl.classList.remove('animate__animated', 'animate__fadeIn');
