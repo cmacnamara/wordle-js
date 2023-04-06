@@ -139,7 +139,6 @@ function render() {
 }
 
 function handleReset() {
-  console.log("Game reset");
   init();
 }
 
@@ -168,7 +167,7 @@ function checkGuess() {
   if(board.boardArray[guessAttemptNum].includes(null)) {
     updateMessage('Not enough runes');
   } else if(!isValidWord(board.boardArray[guessAttemptNum].join('').toLowerCase())) {
-    updateMessage(`not in word list`);
+    updateMessage(`Not in word list`);
   } else {
     let targetChars = targetWord.split('');
     const resultColors = [null, null, null, null, null];
@@ -240,7 +239,13 @@ function delayResultReveal(resultColors, charSquare, charIdx) {
 function handleResetWins() {
   numWins = 0;
   localStorage.setItem("numWins", numWins);
+  rankDisplayEl.classList.remove('animate__animated', 'animate__fadeIn');
+  winsDisplayEl.classList.remove('animate__animated', 'animate__fadeIn');
+  rankDisplayEl.offsetHeight;
+  winsDisplayEl.offsetHeight;
   renderPlayerStats();
+  rankDisplayEl.classList.add('animate__animated', 'animate__fadeIn');
+  winsDisplayEl.classList.add('animate__animated', 'animate__fadeIn');
 }
 
 function renderPlayerStats(){
@@ -255,7 +260,7 @@ function setNumWins() {
 }
 
 function displayNumWins() {
-  winsDisplayEl.textContent = `streak: ${numWins}`
+  winsDisplayEl.textContent = `Streak: ${numWins}`
 }
 
 function displayRank() {
