@@ -71,9 +71,6 @@ class Character {
   constructor(letter, idx){
     this.letter = letter;
     this.idx = idx;
-    this.isInWord = false;
-    this.isInCorrectPosition = false;
-    this.isExcessDuplicate = false;
   }
   toString() {
     return this.letter;
@@ -88,7 +85,7 @@ const LOSS_REVEAL_SPEED = 150;
 
 /*---------------------------- Variables (state) ----------------------------*/
 
-let gameIsWon, guessAttemptNum, targetWord, targetWordTallyObj, numWins;
+let gameIsWon, guessAttemptNum, targetWord, numWins;
 
 
 /*------------------------ Cached Element References ------------------------*/
@@ -169,9 +166,9 @@ function enterLetter(evt) {
 
 function checkGuess() {
   if(board.boardArray[guessAttemptNum].includes(null)) {
-    updateMessage('Guess needs to be 5 letters long');
+    updateMessage('Not enough runes');
   } else if(!isValidWord(board.boardArray[guessAttemptNum].join('').toLowerCase())) {
-    updateMessage(`'${board.boardArray[guessAttemptNum].join('')}' is not a valid word`)
+    updateMessage(`not in word list`);
   } else {
     let targetChars = targetWord.split('');
     const resultColors = [null, null, null, null, null];
