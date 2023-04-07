@@ -4,7 +4,7 @@
 
 import { getTargetWord, isValidWord } from "./wordList.js";
 import { alphabet } from "./alphabet.js";
-import { playButtonSound, playWinSound, playLoseSound } from "./audio.js";
+import { playButtonSound, playWinSound, playLoseSound, playShrekSound } from "./audio.js";
 
 /*-------------------------------- Classes --------------------------------*/
 class Board {
@@ -126,6 +126,9 @@ function checkGuess() {
   } else if(!isValidWord(board.boardArray[guessAttemptNum].join('').toLowerCase())) {
     updateMessage(`Not in word list`);
   } else {
+    if(board.boardArray[guessAttemptNum].join('').toLowerCase() === 'shrek') {
+      playShrekSound();
+    }
     let targetChars = targetWord.split('');
     const resultColors = [null, null, null, null, null];
 
