@@ -28,10 +28,10 @@ Check out my initial planning materials [here](https://docs.google.com/document/
 - Updated CSS to handle smaller screen sizes
 
 ## Ice Box 🧊
-- [x] Add functionality to store users' progress toward Rune Master on local machine
-- [x] Add responsive CSS rules to handle window resizing
+- [x] Add functionality to store users' progress toward Rune Master on their local device.
+- [x] Add responsive CSS rules to handle window resizing.
 - [ ] Add light/dark mode options
-- [ ] Add difficulty selection feature to add/remove number of guesses allowed
-- [x] Add sound effects
-- [ ] Modify CSS to handle larger screen sizes 
-- [ ] Add modal with game rules and options
+- [ ] Add difficulty selection feature to change the number of guesses allowed.
+- [x] Add sound effects.
+- [ ] Modify CSS to handle larger screen sizes. 
+- [ ] Add a modal with game rules and options.

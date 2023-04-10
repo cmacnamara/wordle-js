@@ -1,7 +1,3 @@
-// See if there's anywhere else in the code where I can use the "cells" element array
-// STRETCH GOAL: Add difficulty selection to add or remove number of guesses allowed
-// STRECH GOAL: Add dark mode
-
 import { getTargetWord, isValidWord } from "./wordList.js";
 import { alphabet } from "./alphabet.js";
 import { playButtonSound, playWinSound, playLoseSound, playShrekSound } from "./audio.js";
